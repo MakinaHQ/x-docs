@@ -6,4 +6,10 @@ import { vocs } from "vocs/vite";
 // not needed once fixed
 export default defineConfig(async () => ({
   plugins: [react(), vocs({})],
+  // Mermaid is loaded via a dynamic import in Vocs' client component. Its
+  // transitive `dayjs` dependency ships as UMD, which Vite's dev optimizer
+  // otherwise serves without a `default` export ("does not provide an export
+  // named 'default'"), so `mermaid.initialize` resolves as undefined and
+  // diagrams fail to render. Pre-bundling them fixes the CJS->ESM interop.
+  optimizeDeps: { include: ["mermaid", "dayjs"] },
 }));
