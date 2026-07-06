@@ -1,5 +1,5 @@
 # AggregatorV2V3Interface
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/interfaces/AggregatorV2V3Interface.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/interfaces/AggregatorV2V3Interface.sol)
 
 This interface is a combination of Chainlink's AggregatorInterface.sol
 and AggregatorV3Interface.sol.

@@ -1,11 +1,11 @@
-# IMakinaLiteRegistry
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/interfaces/IMakinaLiteRegistry.sol)
+# IMakinaXRegistry
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/interfaces/IMakinaXRegistry.sol)
 
 
 ## Functions
 ### moduleFactory
 
-Address of the MakinaLiteModule factory.
+Address of the MakinaXModule factory.
 
 
 ```solidity
@@ -14,7 +14,7 @@ function moduleFactory() external view returns (address);
 
 ### moduleImplementation
 
-Address of the MakinaLiteModule implementation.
+Address of the MakinaXModule implementation.
 
 
 ```solidity
@@ -50,22 +50,22 @@ function getBridgeEncoder(uint16 bridgeId) external view returns (address);
 
 ### setModuleFactory
 
-Sets the address of the MakinaLite factory.
+Sets the address of the MakinaXModule factory.
 
 
 ```solidity
-function setModuleFactory(address factory) external;
+function setModuleFactory(address newModuleFactory) external;
 ```
 **Parameters**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`factory`|`address`|The address of the MakinaLite factory.|
+|`newModuleFactory`|`address`|The address of the new MakinaXModule factory.|
 
 
 ### setModuleImplementation
 
-Sets the MakinaLiteModule implementation for future deployments.
+Sets the MakinaXModule implementation for future deployments.
 
 
 ```solidity

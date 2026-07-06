@@ -1,5 +1,5 @@
 # FlashLoanModule
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/flash-loans/FlashLoanModule.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/flash-loans/FlashLoanModule.sol)
 
 **Inherits:**
 [IFlashLoanModule](/contracts/interfaces/IFlashLoanModule.sol/interface.IFlashLoanModule.md)
@@ -15,7 +15,7 @@ bytes32 private constant EXPECTED_DATA_HASH_SLOT =
 
 
 ### moduleFactory
-Address of the MakinaLiteModule factory.
+Address of the MakinaXModule factory.
 
 
 ```solidity
@@ -100,12 +100,12 @@ function _consumeExpectedDataHash(bytes memory data) internal;
 
 ### _handleFlashLoanCallback
 
-Delegates management of flash-loaned funds to the specified MakinaLiteModule.
+Delegates management of flash-loaned funds to the specified MakinaXModule.
 
 
 ```solidity
 function _handleFlashLoanCallback(
-    address makinaLiteModule,
+    address makinaXModule,
     IWeirollComponent.Instruction memory instruction,
     address token,
     uint256 amount

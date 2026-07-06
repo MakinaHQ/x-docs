@@ -1,8 +1,8 @@
-# IMakinaLiteModule
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/interfaces/IMakinaLiteModule.sol)
+# IMakinaXModule
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/interfaces/IMakinaXModule.sol)
 
 **Inherits:**
-[IMakinaLiteContext](/contracts/interfaces/IMakinaLiteContext.sol/interface.IMakinaLiteContext.md), [IMakinaLiteGovernable](/contracts/interfaces/IMakinaLiteGovernable.sol/interface.IMakinaLiteGovernable.md), [IOracleRegistry](/contracts/interfaces/IOracleRegistry.sol/interface.IOracleRegistry.md), [IWeirollComponent](/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent.md), [ISwapComponent](/contracts/interfaces/ISwapComponent.sol/interface.ISwapComponent.md), [IBridgeComponent](/contracts/interfaces/IBridgeComponent.sol/interface.IBridgeComponent.md)
+[IMakinaXContext](/contracts/interfaces/IMakinaXContext.sol/interface.IMakinaXContext.md), [IMakinaXGovernable](/contracts/interfaces/IMakinaXGovernable.sol/interface.IMakinaXGovernable.md), [IOracleRegistry](/contracts/interfaces/IOracleRegistry.sol/interface.IOracleRegistry.md), [IWeirollComponent](/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent.md), [ISwapComponent](/contracts/interfaces/ISwapComponent.sol/interface.ISwapComponent.md), [IBridgeComponent](/contracts/interfaces/IBridgeComponent.sol/interface.IBridgeComponent.md)
 
 
 ## Functions
@@ -12,13 +12,15 @@ Initializes the module with the given parameters.
 
 
 ```solidity
-function initialize(MakinaLiteModuleInitParams calldata params) external;
+function initialize(MakinaXModuleInitParams calldata params, MakinaXModuleServiceParams calldata serviceParams)
+    external;
 ```
 **Parameters**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`params`|`MakinaLiteModuleInitParams`|The initialization parameters.|
+|`params`|`MakinaXModuleInitParams`|The strategy and risk initialization parameters.|
+|`serviceParams`|`MakinaXModuleServiceParams`|The protocol-controlled service initialization parameters.|
 
 
 ### sweepERC20
@@ -46,22 +48,20 @@ function sweepNative() external;
 ```
 
 ## Structs
-### MakinaLiteModuleInitParams
-Initialization parameters.
+### MakinaXModuleInitParams
+Strategy and risk initialization parameters.
 
 
 ```solidity
-struct MakinaLiteModuleInitParams {
+struct MakinaXModuleInitParams {
     address safe;
-    address initialProvider;
-    IMakinaLiteGovernable.OperatingMode initialOperatingMode;
+    IMakinaXGovernable.OperatingMode initialOperatingMode;
     bytes32 initialAllowedInstrRoot;
     uint256 initialMaxPositionIncreaseLossBps;
     uint256 initialMaxPositionDecreaseLossBps;
     uint256 initialInstrCooldownDuration;
     uint256 initialMaxSwapLossBps;
     uint256 initialSwapCooldownDuration;
-    uint256 initialSwapFeeRate;
 }
 ```
 
@@ -70,13 +70,29 @@ struct MakinaLiteModuleInitParams {
 |Name|Type|Description|
 |----|----|-----------|
 |`safe`|`address`|The address of the Safe that the module will be connected to.|
-|`initialProvider`|`address`|The address of the MakinaLite service account.|
-|`initialOperatingMode`|`IMakinaLiteGovernable.OperatingMode`|The initial operating mode of the module.|
+|`initialOperatingMode`|`IMakinaXGovernable.OperatingMode`|The initial operating mode of the module.|
 |`initialAllowedInstrRoot`|`bytes32`|The root of the Merkle tree containing the allowed instructions for the module.|
 |`initialMaxPositionIncreaseLossBps`|`uint256`|The max allowed value loss (in basis points) for position increases while in WALLED mode.|
 |`initialMaxPositionDecreaseLossBps`|`uint256`|The max allowed value loss (in basis points) for position decreases while in WALLED mode.|
 |`initialInstrCooldownDuration`|`uint256`|The cooldown duration (in seconds) for position management while in WALLED mode.|
 |`initialMaxSwapLossBps`|`uint256`|The maximum allowed loss in basis points for swap operations while in FENCED or WALLED mode.|
 |`initialSwapCooldownDuration`|`uint256`|The cooldown duration (in seconds) for swap operations while in FENCED or WALLED mode.|
+
+### MakinaXModuleServiceParams
+Protocol-controlled service initialization parameters.
+
+
+```solidity
+struct MakinaXModuleServiceParams {
+    address initialProvider;
+    uint256 initialSwapFeeRate;
+}
+```
+
+**Properties**
+
+|Name|Type|Description|
+|----|----|-----------|
+|`initialProvider`|`address`|The address of the MakinaX service account.|
 |`initialSwapFeeRate`|`uint256`|The fee rate for swap operations, 1e18 = 100%.|
 
