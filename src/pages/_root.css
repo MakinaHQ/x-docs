@@ -1,0 +1,158 @@
+/**
+ * Makina Lite Docs — Vocs theme overrides.
+ *
+ * Re-maps the Makina design system onto Vocs' semantic CSS variables, matching
+ * the main Makina documentation. Vocs prefixes all of its theme tokens with
+ * `--vocs-` and toggles `color-scheme` per theme, so `light-dark(<light>, <dark>)`
+ * resolves correctly. The accent ramp is configured via `accentColor` in
+ * vocs.config.ts.
+ *
+ * Source palette (Makina Design System):
+ *   Light  bg #E3E3E3 · card #F1F1F1 · text #1E293B · muted #6B6B7B · accent #0891B2
+ *   Dark   bg #0F172A · card #1E293B · text #ECFEFF · muted #7E8B95 · accent #3DC9DE
+ */
+
+:root {
+  /* Typography — system font stack (Vocs defaults to Geist). */
+  --vocs-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
+    "Open Sans", "Helvetica Neue", sans-serif;
+
+  /* Backgrounds — Light/background · Light/card  /  Dark/background · Dark/card */
+  --vocs-background-color-primary: light-dark(#e3e3e3, #0f172a);
+  --vocs-background-color-surface: light-dark(#f1f1f1, #1e293b);
+  --vocs-background-color-surfaceMuted: light-dark(#e9e9e9, #172033);
+  --vocs-background-color-surfaceTint: light-dark(#f1f1f1, #243044);
+  --vocs-background-color-blockquote: light-dark(#ececec, #172033);
+  --vocs-color-background2: light-dark(#ececec, #172033);
+
+  /* Text — Light/primary · Light/secondary  /  Dark/primary · Dark/secondary */
+  --vocs-text-color-primary: light-dark(#1e293b, #ecfeff);
+  --vocs-text-color-secondary: light-dark(#6b6b7b, #7e8b95);
+  --vocs-text-color-muted: light-dark(#6b6b7b, #7e8b95);
+  --vocs-text-color-heading: light-dark(#1e293b, #ecfeff);
+
+  /* Links — teal accent (content links are already underlined by Vocs). */
+  --vocs-text-color-link: light-dark(#0891b2, #3dc9de);
+  --vocs-text-color-link-hover: light-dark(#0779a0, #23bdd5);
+
+  /* Borders — Light/soft · Dark/muted */
+  --vocs-border-color-primary: light-dark(#dddddd, #273243);
+  --vocs-border-color-secondary: light-dark(#dddddd, #273243);
+
+  /* Code — Light/card · Dark/card */
+  --vocs-background-color-code-block: light-dark(#f1f1f1, #1e293b);
+  --vocs-background-color-inline-code: light-dark(#f1f1f1, #1e293b);
+
+  /* Status palette → drives callouts (info/note/tip/warning/danger/success). */
+  --vocs-color-blue: #3dc9de;
+  --vocs-color-green: #91ce59;
+  --vocs-color-yellow: #ecbb3e;
+  --vocs-color-red: #f64646;
+}
+
+/*
+ * Home page (the only `minimal`-layout page) forces the sidebar footer on so the
+ * theme toggle and socials stay in the bottom-left corner. Vocs only paints its
+ * surface panel for `full`-layout content, so under `minimal` it leaks out as a
+ * lighter strip beside the primary-background content. Hide it so the landing
+ * page keeps a single, consistent background. Content pages are `full`, untouched.
+ */
+[data-layout="minimal"] [data-v-surface-bg] {
+  display: none;
+}
+
+/* Home page hero: a larger logo and a bigger, two-line title vertically centered
+   on the same axis as the logo, with a wider subtitle. The `home-*` classes are
+   passed to the Vocs HomePage components, which also stamp their own Tailwind
+   utilities (`vocs:h-12`, `vocs:text-xl`, `vocs:leading-relaxed`, `vocs:max-w-2xl`)
+   at the same specificity. Scoping these rules under `.home-hero-head` raises
+   their specificity so they win deterministically regardless of stylesheet order
+   (otherwise the logo can render at the 3rem Tailwind height while the title
+   stays large, which throws the two out of alignment). */
+.home-hero-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.home-hero-head .home-logo {
+  height: 5rem;
+  width: auto;
+}
+
+.home-hero-head .home-title {
+  margin: 0;
+  max-width: none;
+  /* Left-aligned so the "M" of Makina lines up above the "D" of Documentation. */
+  text-align: left;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.home-subtitle {
+  max-width: 42rem;
+}
+
+@media (min-width: 768px) {
+  .home-hero-head .home-logo {
+    height: 7rem;
+  }
+
+  .home-hero-head .home-title {
+    font-size: 4.5rem;
+  }
+}
+
+/* "Lite Docs" wordmark beside the nav logo glyph. Vocs only renders the logo
+   image, so we append the text on the logo's flex container (the `[data-v-logo]`
+   that directly holds the image). The hero logo uses different markup, so it is
+   unaffected. */
+[data-v-logo]:has(> [data-v-logo-image])::after {
+  content: "Lite Docs";
+  margin-left: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--vocs-text-color-heading);
+}
+
+/* The leading page link ("Introduction") is wrapped in an untitled, empty-header
+   section that Vocs marks expanded (data-collapsed="false"), so it picks up the
+   inter-section `mb-4` gap that the collapsed sibling sections don't have, leaving
+   it visually segregated. Drop that gap and give the link the same row height as a
+   section header so the top-level entries share one even rhythm. */
+[data-v-sidebar] > section:has(> [data-empty]) {
+  margin-bottom: 0;
+}
+
+[data-v-sidebar] > section:has(> [data-empty]) > [data-v-sidebar-section-content] > [data-v-sidebar-item] {
+  height: 2.5em;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* An expanded nested group at the top level (e.g. "Operations") also carries the
+   inter-section mb-4 gap, which reads as extra space before the next top-level
+   link ("Pricing & Oracles"). Drop it so a dropdown keeps the same rhythm as the
+   plain links around it. The Contracts sidebar is unaffected: its groups render
+   collapsed and never pick up this gap. */
+[data-v-sidebar] > section[data-collapsed="false"]:not(:has(> [data-empty])) {
+  margin-bottom: 0;
+}
+
+/* Vocs groups every run of plain links into its own untitled section, each
+   prefixed with an empty `[data-empty]` header (a 1em spacer). The leading
+   section's spacer gives the sidebar its top breathing room, but a run that
+   follows a group (the links after "Operations") gets one too, which reads as
+   a gap before its first link ("Pricing & Oracles"). Collapse every empty
+   header except the leading one so those links resume the normal row rhythm. */
+[data-v-sidebar] > section:has(> [data-empty]):not(:first-of-type) > [data-empty] {
+  display: none;
+}
