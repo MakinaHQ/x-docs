@@ -347,4 +347,3 @@ Transfers `amount` of ERC20 `token` from the Safe to the flash loan module via a
 ```solidity
 function _refundFlashLoan(address token, uint256 amount, address flashLoanModule) internal virtual;
 ```
-

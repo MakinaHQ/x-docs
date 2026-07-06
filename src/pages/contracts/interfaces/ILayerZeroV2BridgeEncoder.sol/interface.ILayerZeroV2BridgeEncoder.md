@@ -88,4 +88,3 @@ event OftAdded(address indexed oft);
 ```solidity
 event OftRemoved(address indexed oft);
 ```
-

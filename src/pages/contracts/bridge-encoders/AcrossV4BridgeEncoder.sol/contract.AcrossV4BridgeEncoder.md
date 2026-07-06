@@ -126,5 +126,3 @@ function removeRoute(address inputToken, uint256 foreignChainId, address outputT
 |`inputToken`|`address`|The token to be sent from the source chain.|
 |`foreignChainId`|`uint256`|The destination chain ID.|
 |`outputToken`|`address`|The token to be received on the destination chain.|
-
-

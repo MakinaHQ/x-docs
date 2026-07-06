@@ -1,6 +1,6 @@
 # Token Swaps
 
-A strategy can swap tokens through external DEX aggregators. As elsewhere in Makina Lite, the swap component measures the realized output rather than trusting what the aggregator reports. In `FENCED` and `WALLED` mode it additionally bounds that output against an oracle-priced fair value. For the exact rules, see [`SwapComponent`](/contracts/module-components/SwapComponent.sol/abstract.SwapComponent) in the Contracts reference.
+A strategy can swap tokens through external DEX aggregators. As elsewhere in MakinaX, the swap component measures the realized output rather than trusting what the aggregator reports. In `FENCED` and `WALLED` mode it additionally bounds that output against an oracle-priced fair value. For the exact rules, see [`SwapComponent`](/contracts/module-components/SwapComponent.sol/abstract.SwapComponent) in the Contracts reference.
 
 ## How a swap runs
 
@@ -38,7 +38,7 @@ The Operator chooses which registered swapper to use and supplies the route call
 
 The aggregator is treated as a black box. The module never believes the amount the aggregator claims to have delivered. It records the output token balance before the external call and after, and takes the difference as the realized output. That delta is the only trusted measure. If it is below the order's `minOutputAmount`, the swap reverts.
 
-This is the same principle as everywhere in Makina Lite: bound the outcome, not the input. Arbitrary route calldata is allowed because encoding every aggregator's ABI on-chain is infeasible, so the module accepts the operator's route and checks what actually came back.
+This is the same principle as everywhere in MakinaX: bound the outcome, not the input. Arbitrary route calldata is allowed because encoding every aggregator's ABI on-chain is infeasible, so the module accepts the operator's route and checks what actually came back.
 
 ## Mode-gated guards
 

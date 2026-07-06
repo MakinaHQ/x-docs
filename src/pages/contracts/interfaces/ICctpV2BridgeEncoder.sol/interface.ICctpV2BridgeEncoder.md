@@ -46,4 +46,3 @@ function setCctpDomain(uint256 evmChainId, uint32 cctpDomain) external;
 ```solidity
 event CctpDomainRegistered(uint256 indexed evmChainId, uint32 indexed cctpDomain);
 ```
-

@@ -1,8 +1,8 @@
 # Risk Model
 
-This page maps the risks a Makina Lite deployment carries: where they come from, what bounds them, and what assumptions must hold. It is written for auditors, integrators, and Safe owners deciding how to configure a module. It does not enumerate vulnerabilities. It frames the threat surface.
+This page maps the risks a MakinaX deployment carries: where they come from, what bounds them, and what assumptions must hold. It is written for auditors, integrators, and Safe owners deciding how to configure a module. It does not enumerate vulnerabilities. It frames the threat surface.
 
-The guiding principle throughout Makina Lite is **bound the outcome, not the input**. Operators supply adversarial calldata. The contracts do not validate that calldata. They constrain authorization (Merkle gating) and measured results (loss limits, minimum outputs, cooldowns). The risks below are best understood as the places where that bounding is incomplete or rests on an assumption.
+The guiding principle throughout MakinaX is **bound the outcome, not the input**. Operators supply adversarial calldata. The contracts do not validate that calldata. They constrain authorization (Merkle gating) and measured results (loss limits, minimum outputs, cooldowns). The risks below are best understood as the places where that bounding is incomplete or rests on an assumption.
 
 ## Trust boundaries
 
@@ -14,7 +14,7 @@ flowchart TB
     subgraph Untrusted["Untrusted: operator calldata"]
         Op["swap data, weiroll commands,<br/>bridge extraData"]:::unt
     end
-    Module["MakinaLiteModule<br/>gate: Merkle (always) + mode guards<br/>chokepoint: pull-from-Safe"]:::core
+    Module["MakinaXModule<br/>gate: Merkle (always) + mode guards<br/>chokepoint: pull-from-Safe"]:::core
     subgraph External["External black boxes"]
         Ext["Weiroll VM (high trust, runs in Safe),<br/>DEX aggregators, bridges,<br/>Morpho, Chainlink feeds"]:::ext
     end
@@ -32,7 +32,7 @@ flowchart TB
 
 The whole threat model rests on assumptions about the environment a module runs in.
 
-- **The Safe is a stock Safe.** The deployed Safe is assumed to be an unmodified Gnosis Safe (v1.4.1 or later) with the Makina Lite module enabled and no other modules or guards installed.
+- **The Safe is a stock Safe.** The deployed Safe is assumed to be an unmodified Gnosis Safe (v1.4.1 or later) with the MakinaX module enabled and no other modules or guards installed.
 - **Tokens are well-behaved.** Tokens used as instruction inputs, swap inputs, bridge inputs, or oracle quote tokens are assumed to be standard ERC-20 contracts with 6 to 18 decimals, no rebasing, no transfer hooks, and no fee on transfer. The balance-delta guards and the direct bridge amount comparison both rely on this.
 
 ## Technical risks
@@ -83,5 +83,5 @@ Every oracle-priced guard inherits the oracle's integrity assumptions: honest Ch
 | **OpenZeppelin AccessManager** | Infrastructure authorization | Trusted infra control plane |
 
 :::tip[Next]
-For the parameters that configure these guards, see [Configure the Makina Lite Module](/configure).
+For the parameters that configure these guards, see [Configure the MakinaX Module](/configure).
 :::

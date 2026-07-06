@@ -499,4 +499,3 @@ Computes the fee for a given swap output, transfers it to the fee collector, and
 ```solidity
 function _chargeSwapFee(address tokenOut, uint256 amountOut) internal returns (uint256);
 ```
-

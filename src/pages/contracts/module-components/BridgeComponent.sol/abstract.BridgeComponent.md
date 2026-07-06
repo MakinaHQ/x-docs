@@ -117,4 +117,3 @@ Checks cooldown for a given bridge and updates its last guarded outgoing transfe
 ```solidity
 function _checkAndSetCooldown(uint16 bridgeId) internal;
 ```
-

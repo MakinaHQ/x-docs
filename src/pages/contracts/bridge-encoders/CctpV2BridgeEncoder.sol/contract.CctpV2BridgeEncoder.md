@@ -119,5 +119,3 @@ function setCctpDomain(uint256 evmChainId, uint32 cctpDomain) external override 
 |----|----|-----------|
 |`evmChainId`|`uint256`|The EVM chain ID.|
 |`cctpDomain`|`uint32`|The CCTP domain.|
-
-

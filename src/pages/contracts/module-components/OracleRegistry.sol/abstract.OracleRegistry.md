@@ -158,4 +158,3 @@ Internal logic to set the price staleness threshold for a given feed.
 ```solidity
 function _setFeedStaleThreshold(address feed, uint256 newThreshold) internal;
 ```
-

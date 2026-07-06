@@ -222,4 +222,3 @@ Performs sanity check on a fee rate.
 ```solidity
 function _checkFeeRate(uint256 rate) internal pure;
 ```
-

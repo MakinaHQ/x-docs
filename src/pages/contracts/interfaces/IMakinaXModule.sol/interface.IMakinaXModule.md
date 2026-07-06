@@ -95,4 +95,3 @@ struct MakinaXModuleServiceParams {
 |----|----|-----------|
 |`initialProvider`|`address`|The address of the MakinaX service account.|
 |`initialSwapFeeRate`|`uint256`|The fee rate for swap operations, 1e18 = 100%.|
-

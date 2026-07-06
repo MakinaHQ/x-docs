@@ -147,5 +147,3 @@ function setBridgeEncoder(uint16 bridgeId, address bridgeEncoder) external restr
 |----|----|-----------|
 |`bridgeId`|`uint16`|The ID of the bridge.|
 |`bridgeEncoder`|`address`|The address of the new bridge encoder instance.|
-
-

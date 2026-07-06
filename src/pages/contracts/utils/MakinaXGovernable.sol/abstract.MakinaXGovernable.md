@@ -262,4 +262,3 @@ Internal logic to update the operating mode.
 ```solidity
 function _setOperatingMode(OperatingMode newMode) internal;
 ```
-

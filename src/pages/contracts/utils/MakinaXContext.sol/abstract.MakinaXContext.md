@@ -22,4 +22,3 @@ address public immutable override registry
 ```solidity
 constructor(address _registry) ;
 ```
-

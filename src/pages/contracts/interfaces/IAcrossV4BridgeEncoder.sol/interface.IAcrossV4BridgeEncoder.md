@@ -87,4 +87,3 @@ event RouteAdded(address indexed inputToken, uint256 indexed foreignChainId, add
 ```solidity
 event RouteRemoved(address indexed inputToken, uint256 indexed foreignChainId, address indexed outputToken);
 ```
-

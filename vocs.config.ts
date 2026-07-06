@@ -2,9 +2,9 @@ import { defineConfig } from "vocs/config";
 import { generateSidebar } from "./sidebar.js";
 
 export default defineConfig({
-  title: "Makina Lite Docs",
-  description: "Documentation for the Makina Lite protocol",
-  titleTemplate: "%s | Makina Lite Docs",
+  title: "MakinaX Docs",
+  description: "Documentation for the MakinaX protocol",
+  titleTemplate: "%s | MakinaX Docs",
 
   // Branding assets (see public/img), shared with the main Makina docs. SVG
   // marks keep the nav logo crisp at any size: dark-fill in light mode, the
@@ -75,7 +75,7 @@ export default defineConfig({
     "/contracts": generateSidebar("contracts"),
   },
   socials: [
-    { icon: "github", link: "https://github.com/MakinaHQ/makina-lite" },
+    { icon: "github", link: "https://github.com/MakinaHQ/makina-x" },
     { icon: "x", link: "https://x.com/makinafi" },
   ],
 });

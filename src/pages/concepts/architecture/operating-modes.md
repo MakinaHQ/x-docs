@@ -1,6 +1,6 @@
 # Operating Modes
 
-The operating mode is the central risk dial of a Makina Lite module. It decides how tightly the module constrains Operator actions on-chain, and it is the lever a Safe and the protocol use to widen or narrow Operator power, instantly and without redeploying.
+The operating mode is the central risk dial of a MakinaX module. It decides how tightly the module constrains Operator actions on-chain, and it is the lever a Safe and the protocol use to widen or narrow Operator power, instantly and without redeploying.
 
 ## The 3 modes
 
