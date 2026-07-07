@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gen:sidebar": "bun run scripts/generate-sidebar.ts"
   },
   "dependencies": {
     "vite": "^8.1.3",
