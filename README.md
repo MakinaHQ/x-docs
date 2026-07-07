@@ -1,6 +1,6 @@
-# Makina Lite Docs
+# MakinaX Docs
 
-This repo contains the Makina Lite Docs, built with [Vocs](https://vocs.dev/).
+This repo contains the MakinaX Docs, built with [Vocs](https://vocs.dev/).
 
 ### Installation
 

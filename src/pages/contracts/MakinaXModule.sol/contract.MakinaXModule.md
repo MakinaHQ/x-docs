@@ -1,8 +1,8 @@
-# MakinaLiteModule
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/MakinaLiteModule.sol)
+# MakinaXModule
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/MakinaXModule.sol)
 
 **Inherits:**
-[MakinaLiteContext](/contracts/utils/MakinaLiteContext.sol/abstract.MakinaLiteContext.md), [MakinaLiteGovernable](/contracts/utils/MakinaLiteGovernable.sol/abstract.MakinaLiteGovernable.md), [OracleRegistry](/contracts/module-components/OracleRegistry.sol/abstract.OracleRegistry.md), [WeirollComponent](/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent.md), [SwapComponent](/contracts/module-components/SwapComponent.sol/abstract.SwapComponent.md), [BridgeComponent](/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent.md), ReentrancyGuard, [IMakinaLiteModule](/contracts/interfaces/IMakinaLiteModule.sol/interface.IMakinaLiteModule.md)
+[MakinaXContext](/contracts/utils/MakinaXContext.sol/abstract.MakinaXContext.md), [MakinaXGovernable](/contracts/utils/MakinaXGovernable.sol/abstract.MakinaXGovernable.md), [OracleRegistry](/contracts/module-components/OracleRegistry.sol/abstract.OracleRegistry.md), [WeirollComponent](/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent.md), [SwapComponent](/contracts/module-components/SwapComponent.sol/abstract.SwapComponent.md), [BridgeComponent](/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent.md), ReentrancyGuard, [IMakinaXModule](/contracts/interfaces/IMakinaXModule.sol/interface.IMakinaXModule.md)
 
 
 ## Constants
@@ -29,7 +29,7 @@ uint256 private constant MAX_FEE_RATE = 1e18
 
 
 ```solidity
-constructor(address _registry, address _weirollVm) MakinaLiteContext(_registry) WeirollComponent(_weirollVm);
+constructor(address _registry, address _weirollVm) MakinaXContext(_registry) WeirollComponent(_weirollVm);
 ```
 
 ### initialize
@@ -38,13 +38,17 @@ Initializes the module with the given parameters.
 
 
 ```solidity
-function initialize(MakinaLiteModuleInitParams calldata params) external override initializer;
+function initialize(MakinaXModuleInitParams calldata params, MakinaXModuleServiceParams calldata serviceParams)
+    external
+    override
+    initializer;
 ```
 **Parameters**
 
 |Name|Type|Description|
 |----|----|-----------|
-|`params`|`MakinaLiteModuleInitParams`|The initialization parameters.|
+|`params`|`MakinaXModuleInitParams`|The strategy and risk initialization parameters.|
+|`serviceParams`|`MakinaXModuleServiceParams`|The protocol-controlled service initialization parameters.|
 
 
 ### receive
@@ -495,4 +499,3 @@ Computes the fee for a given swap output, transfers it to the fee collector, and
 ```solidity
 function _chargeSwapFee(address tokenOut, uint256 amountOut) internal returns (uint256);
 ```
-

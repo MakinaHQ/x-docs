@@ -1,8 +1,8 @@
-# MakinaLiteGovernable
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/utils/MakinaLiteGovernable.sol)
+# MakinaXGovernable
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/utils/MakinaXGovernable.sol)
 
 **Inherits:**
-Initializable, [IMakinaLiteGovernable](/contracts/interfaces/IMakinaLiteGovernable.sol/interface.IMakinaLiteGovernable.md)
+Initializable, [IMakinaXGovernable](/contracts/interfaces/IMakinaXGovernable.sol/interface.IMakinaXGovernable.md)
 
 
 ## State Variables
@@ -16,7 +16,7 @@ address public override safe
 
 
 ### provider
-Address of the MakinaLite service account.
+Address of the MakinaX service account.
 
 
 ```solidity
@@ -66,11 +66,11 @@ OperatingMode public override operatingMode
 
 
 ## Functions
-### __MakinaLiteGovernable_init
+### __MakinaXGovernable_init
 
 
 ```solidity
-function __MakinaLiteGovernable_init(address _safe, address _provider, OperatingMode _initialOperatingMode)
+function __MakinaXGovernable_init(address _safe, address _provider, OperatingMode _initialOperatingMode)
     internal
     onlyInitializing;
 ```
@@ -238,7 +238,7 @@ function unpause() external override onlyGuardian;
 
 ### _setProvider
 
-Internal function to update the MakinaLite service account.
+Internal function to update the MakinaX service account.
 
 
 ```solidity
@@ -262,4 +262,3 @@ Internal logic to update the operating mode.
 ```solidity
 function _setOperatingMode(OperatingMode newMode) internal;
 ```
-

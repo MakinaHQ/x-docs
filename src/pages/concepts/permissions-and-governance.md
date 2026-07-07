@@ -1,9 +1,9 @@
 # Permissions & Governance
 
-Makina Lite has two distinct access-control systems, and keeping them separate is essential to understanding the trust model.
+MakinaX has two distinct access-control systems, and keeping them separate is essential to understanding the trust model.
 
-- **Module-level roles** govern a single [`MakinaLiteModule`](/contracts/MakinaLiteModule.sol/contract.MakinaLiteModule) and its Safe. They are simple address mappings and modifiers, implemented in [`MakinaLiteGovernable`](/contracts/utils/MakinaLiteGovernable.sol/abstract.MakinaLiteGovernable).
-- **Infrastructure roles** govern the shared contracts (`MakinaLiteRegistry`, `ModuleFactory`, and the bridge encoders) through an [OpenZeppelin AccessManager](https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManager).
+- **Module-level roles** govern a single [`MakinaXModule`](/contracts/MakinaXModule.sol/contract.MakinaXModule) and its Safe. They are simple address mappings and modifiers, implemented in [`MakinaXGovernable`](/contracts/utils/MakinaXGovernable.sol/abstract.MakinaXGovernable).
+- **Infrastructure roles** govern the shared contracts (`MakinaXRegistry`, `ModuleFactory`, and the bridge encoders) through an [OpenZeppelin AccessManager](https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManager).
 
 The two domains meet only at well-defined seams: modules read shared addresses from the registry, the factory mints modules, and bridge encoders read the calling module's operating mode.
 
@@ -18,7 +18,7 @@ flowchart TB
     Operator["Operator(s)<br/>strategy execution"]:::op
     Guardian["Guardian(s)<br/>emergency pause"]:::guard
 
-    Provider -- "fee rate, suspend / unsuspend" --> Module["MakinaLiteModule"]:::core
+    Provider -- "fee rate, suspend / unsuspend" --> Module["MakinaXModule"]:::core
     Safe -- "adds / removes" --> Operator
     Safe -- "adds / removes" --> Guardian
     Safe -- "sets mode, root, limits, routes, recipients" --> Module
@@ -56,9 +56,9 @@ The Safe is **always a Guardian** and cannot remove itself from that role, so th
 
 All protocol-wide restricted actions are gated by a single `AccessManager` per chain, shared with the Makina Core protocol. The addresses holding these roles are fully trusted.
 
-Each role can carry an **execution delay** (a timelock between scheduling a restricted action and executing it) and a **guardian** that can cancel a scheduled action during that window. Makina Lite shares this infrastructure control plane with the wider Makina deployment, so the holders, delays, and guardian assignments match those of the production AccessManager.
+Each role can carry an **execution delay** (a timelock between scheduling a restricted action and executing it) and a **guardian** that can cancel a scheduled action during that window. MakinaX shares this infrastructure control plane with the wider Makina deployment, so the holders, delays, and guardian assignments match those of the production AccessManager.
 
-| Role | id | Authority in Makina Lite | Holder, execution delay |
+| Role | id | Authority in MakinaX | Holder, execution delay |
 | --- | --- | --- | --- |
 | `ADMIN_ROLE` | 0 | Super admin of the AccessManager: configure roles, delays, and guardians. Has **no guardian**, so its actions cannot be cancelled by anyone else. | Deployment factory: no delay (at setup)<br/>DAO: 2-day delay |
 | `INFRA_CONFIG_ROLE` | 1 | Configure the registry (factory, implementation, fee collector, flash-loan module, bridge encoder addresses) and the bridge encoders (routes, CCTP domains, endpoint IDs, OFTs). | DAO: 1-day delay |

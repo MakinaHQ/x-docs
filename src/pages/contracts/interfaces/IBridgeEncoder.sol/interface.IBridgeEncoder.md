@@ -1,5 +1,5 @@
 # IBridgeEncoder
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/interfaces/IBridgeEncoder.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/interfaces/IBridgeEncoder.sol)
 
 
 ## Functions
@@ -7,7 +7,7 @@
 
 Returns targets, value, and calldata to execute a bridge transfer.
 
-Intended to be called only by a MakinaLiteModule instance, from which implementations may read caller state via `msg.sender`.
+Intended to be called only by a MakinaXModule instance, from which implementations may read caller state via `msg.sender`.
 
 
 ```solidity

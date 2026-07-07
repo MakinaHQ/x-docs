@@ -1,5 +1,5 @@
 # SwapComponent
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/module-components/SwapComponent.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/module-components/SwapComponent.sol)
 
 **Inherits:**
 [ISwapComponent](/contracts/interfaces/ISwapComponent.sol/interface.ISwapComponent.md)
@@ -149,4 +149,3 @@ function _valueOf(address baseToken, address quoteToken, uint256 baseTokenAmount
     virtual
     returns (uint256);
 ```
-

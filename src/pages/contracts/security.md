@@ -7,9 +7,9 @@ sidebar_label: Security
 
 ## Audits
 
-The Makina Lite smart contracts have been audited by ChainSecurity.
+The MakinaX smart contracts have been audited by ChainSecurity.
 
-- **ChainSecurity**: [Makina Lite - June 2026](https://www.chainsecurity.com/security-audit/makina-lite)
+- **ChainSecurity**: [MakinaX - June 2026](https://www.chainsecurity.com/security-audit/makina-lite)
 
 ## Contact
 

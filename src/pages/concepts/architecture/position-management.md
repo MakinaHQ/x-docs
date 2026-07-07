@@ -1,6 +1,6 @@
 # Position Management
 
-Position management is how a strategy actually deploys capital: opening, resizing, and closing positions in external protocols, and measuring what those positions are worth. It is the most security-critical part of Makina Lite, because it runs operator-supplied scripts **inside the Safe** and is the path through which most value moves.
+Position management is how a strategy actually deploys capital: opening, resizing, and closing positions in external protocols, and measuring what those positions are worth. It is the most security-critical part of MakinaX, because it runs operator-supplied scripts **inside the Safe** and is the path through which most value moves.
 
 This page explains the mental model. For the exact validation rules, see [`WeirollComponent`](/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent) and its interface [`IWeirollComponent`](/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent) in the Contracts reference.
 
@@ -20,7 +20,7 @@ The leaf binds the instruction's identity: its commands, its fixed parameters, i
 
 ### Fixed and variable parameters
 
-A single approved instruction often needs to run with different inputs over time (a varying amount, for example). Makina Lite supports this with a **bitmap** on each instruction.
+A single approved instruction often needs to run with different inputs over time (a varying amount, for example). MakinaX supports this with a **bitmap** on each instruction.
 
 The bitmap marks which script state slots are **fixed** (their values are hashed into the leaf and committed in advance) and which are **variable** (excluded from the hash, so the Operator chooses them at call time). This lets one pre-approved instruction serve many parameterizations, while still pinning down everything the Safe wanted to pin down.
 
@@ -87,7 +87,7 @@ In `WALLED` mode, each successful `MANAGEMENT` script records a timestamp keyed 
 
 ## Flash-loan-assisted management
 
-Some position management needs temporary capital that is borrowed and repaid in the same transaction, for example to unwind a leveraged position. Makina Lite supports this through a shared `FlashLoanModule` that wraps [Morpho](https://morpho.org/) flash loans and hands the borrowed funds to a module's position-management logic.
+Some position management needs temporary capital that is borrowed and repaid in the same transaction, for example to unwind a leveraged position. MakinaX supports this through a shared `FlashLoanModule` that wraps [Morpho](https://morpho.org/) flash loans and hands the borrowed funds to a module's position-management logic.
 
 Flash loan funds are only ever used by a `FLASHLOAN_MANAGEMENT` instruction, nested within an outer `MANAGEMENT` instruction. They are not a standalone Operator capability. For the exact mechanics, see [`FlashLoanModule`](/contracts/flash-loans/FlashLoanModule.sol/contract.FlashLoanModule) in the Contracts reference.
 
@@ -100,7 +100,7 @@ sequenceDiagram
     participant Safe
     participant FL as FlashLoanModule
     participant Morpho
-    participant Module as MakinaLiteModule (taker)
+    participant Module as MakinaXModule (taker)
     Safe->>FL: requestFlashLoan(taker, token, amount, instruction)
     FL->>Morpho: flashLoan(token, amount, data)
     Morpho->>FL: onMorphoFlashLoan(assets, data)

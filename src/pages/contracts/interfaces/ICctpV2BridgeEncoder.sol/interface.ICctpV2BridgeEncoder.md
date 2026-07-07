@@ -1,5 +1,5 @@
 # ICctpV2BridgeEncoder
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/interfaces/ICctpV2BridgeEncoder.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/interfaces/ICctpV2BridgeEncoder.sol)
 
 **Inherits:**
 [IBridgeEncoder](/contracts/interfaces/IBridgeEncoder.sol/interface.IBridgeEncoder.md)
@@ -46,4 +46,3 @@ function setCctpDomain(uint256 evmChainId, uint32 cctpDomain) external;
 ```solidity
 event CctpDomainRegistered(uint256 indexed evmChainId, uint32 indexed cctpDomain);
 ```
-

@@ -1,5 +1,5 @@
 # BridgeComponent
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/module-components/BridgeComponent.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/module-components/BridgeComponent.sol)
 
 **Inherits:**
 [IBridgeComponent](/contracts/interfaces/IBridgeComponent.sol/interface.IBridgeComponent.md)
@@ -117,4 +117,3 @@ Checks cooldown for a given bridge and updates its last guarded outgoing transfe
 ```solidity
 function _checkAndSetCooldown(uint16 bridgeId) internal;
 ```
-

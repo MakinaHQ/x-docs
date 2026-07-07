@@ -15,7 +15,7 @@ type Page =
   | { path: '/concepts/permissions-and-governance'; render: 'static' }
   | { path: '/concepts/risk-model'; render: 'static' }
   | { path: '/configure'; render: 'static' }
-  | { path: '/contracts/MakinaLiteModule.sol/contract.MakinaLiteModule'; render: 'static' }
+  | { path: '/contracts/MakinaXModule.sol/contract.MakinaXModule'; render: 'static' }
   | { path: '/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder'; render: 'static' }
   | { path: '/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder'; render: 'static' }
   | { path: '/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder'; render: 'static' }
@@ -32,10 +32,10 @@ type Page =
   | { path: '/contracts/interfaces/ICctpV2TokenMessenger.sol/interface.ICctpV2TokenMessenger'; render: 'static' }
   | { path: '/contracts/interfaces/IFlashLoanModule.sol/interface.IFlashLoanModule'; render: 'static' }
   | { path: '/contracts/interfaces/ILayerZeroV2BridgeEncoder.sol/interface.ILayerZeroV2BridgeEncoder'; render: 'static' }
-  | { path: '/contracts/interfaces/IMakinaLiteContext.sol/interface.IMakinaLiteContext'; render: 'static' }
-  | { path: '/contracts/interfaces/IMakinaLiteGovernable.sol/interface.IMakinaLiteGovernable'; render: 'static' }
-  | { path: '/contracts/interfaces/IMakinaLiteModule.sol/interface.IMakinaLiteModule'; render: 'static' }
-  | { path: '/contracts/interfaces/IMakinaLiteRegistry.sol/interface.IMakinaLiteRegistry'; render: 'static' }
+  | { path: '/contracts/interfaces/IMakinaXContext.sol/interface.IMakinaXContext'; render: 'static' }
+  | { path: '/contracts/interfaces/IMakinaXGovernable.sol/interface.IMakinaXGovernable'; render: 'static' }
+  | { path: '/contracts/interfaces/IMakinaXModule.sol/interface.IMakinaXModule'; render: 'static' }
+  | { path: '/contracts/interfaces/IMakinaXRegistry.sol/interface.IMakinaXRegistry'; render: 'static' }
   | { path: '/contracts/interfaces/IModuleFactory.sol/interface.IModuleFactory'; render: 'static' }
   | { path: '/contracts/interfaces/IMorpho.sol/interface.IMorpho'; render: 'static' }
   | { path: '/contracts/interfaces/IMorphoFlashLoanCallback.sol/interface.IMorphoFlashLoanCallback'; render: 'static' }
@@ -51,10 +51,10 @@ type Page =
   | { path: '/contracts/module-components/OracleRegistry.sol/abstract.OracleRegistry'; render: 'static' }
   | { path: '/contracts/module-components/SwapComponent.sol/abstract.SwapComponent'; render: 'static' }
   | { path: '/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent'; render: 'static' }
-  | { path: '/contracts/registry/MakinaLiteRegistry.sol/contract.MakinaLiteRegistry'; render: 'static' }
+  | { path: '/contracts/registry/MakinaXRegistry.sol/contract.MakinaXRegistry'; render: 'static' }
   | { path: '/contracts/security'; render: 'static' }
-  | { path: '/contracts/utils/MakinaLiteContext.sol/abstract.MakinaLiteContext'; render: 'static' }
-  | { path: '/contracts/utils/MakinaLiteGovernable.sol/abstract.MakinaLiteGovernable'; render: 'static' }
+  | { path: '/contracts/utils/MakinaXContext.sol/abstract.MakinaXContext'; render: 'static' }
+  | { path: '/contracts/utils/MakinaXGovernable.sol/abstract.MakinaXGovernable'; render: 'static' }
   | { path: '/'; render: 'static' }
 
 // prettier-ignore

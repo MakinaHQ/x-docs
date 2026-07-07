@@ -1,4 +1,4 @@
-# Configure the Makina Lite Module
+# Configure the MakinaX Module
 
 This is a map of the parameters that shape a module's behavior: what each one does and where it is explained in depth. The conceptual pages cover the mechanics; this page is the index to them from a configuration standpoint.
 

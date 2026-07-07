@@ -1,5 +1,5 @@
 # OracleRegistry
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/module-components/OracleRegistry.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/module-components/OracleRegistry.sol)
 
 **Inherits:**
 [IOracleRegistry](/contracts/interfaces/IOracleRegistry.sol/interface.IOracleRegistry.md)
@@ -158,4 +158,3 @@ Internal logic to set the price staleness threshold for a given feed.
 ```solidity
 function _setFeedStaleThreshold(address feed, uint256 newThreshold) internal;
 ```
-

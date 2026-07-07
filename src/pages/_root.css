@@ -1,5 +1,5 @@
 /**
- * Makina Lite Docs — Vocs theme overrides.
+ * MakinaX Docs — Vocs theme overrides.
  *
  * Re-maps the Makina design system onto Vocs' semantic CSS variables, matching
  * the main Makina documentation. Vocs prefixes all of its theme tokens with
@@ -108,12 +108,12 @@
   }
 }
 
-/* "Lite Docs" wordmark beside the nav logo glyph. Vocs only renders the logo
+/* "MakinaX Docs" wordmark beside the nav logo glyph. Vocs only renders the logo
    image, so we append the text on the logo's flex container (the `[data-v-logo]`
    that directly holds the image). The hero logo uses different markup, so it is
    unaffected. */
 [data-v-logo]:has(> [data-v-logo-image])::after {
-  content: "Lite Docs";
+  content: "MakinaX Docs";
   margin-left: 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;

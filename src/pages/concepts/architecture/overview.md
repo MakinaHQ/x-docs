@@ -2,7 +2,7 @@
 
 ## The Safe and the module
 
-Makina Lite is a single **`MakinaLiteModule`** installed on an existing **Safe** multisig. The Safe remains in the hands of its signers throughout. Installing the module grants it module-execution rights on the Safe, and nothing more.
+MakinaX is a single **`MakinaXModule`** installed on an existing **Safe** multisig. The Safe remains in the hands of its signers throughout. Installing the module grants it module-execution rights on the Safe, and nothing more.
 
 - The **Safe** is the owner and custodian. It holds the tokens, sets every configuration and risk parameter, and can pause or disable the module. Module-execution rights are what let the module act for the Safe.
 - The **module** is a constrained automation layer. It carries no funds in steady state. It pulls inputs from the Safe, performs an action, and returns the outputs to the Safe within the same transaction. Weiroll scripts run directly inside the Safe's own context by delegatecall.
@@ -10,7 +10,7 @@ Makina Lite is a single **`MakinaLiteModule`** installed on an existing **Safe**
 ```mermaid
 flowchart TB
     Safe["Safe multisig<br/>(owner &amp; custodian of funds)"]:::core
-    Module["MakinaLiteModule<br/>(constrained automation)"]:::core
+    Module["MakinaXModule<br/>(constrained automation)"]:::core
     Operator([Operator]):::actor
     Ext[(External protocols:<br/>DEX, bridges, Morpho,<br/>Chainlink feeds)]:::ext
 
@@ -29,7 +29,7 @@ A module operates on a single chain. Cross-chain movement is **outbound bridging
 
 ## What the module composes
 
-[`MakinaLiteModule`](/contracts/MakinaLiteModule.sol/contract.MakinaLiteModule) is the single concrete contract. It inherits a set of abstract components, each owning one responsibility:
+[`MakinaXModule`](/contracts/MakinaXModule.sol/contract.MakinaXModule) is the single concrete contract. It inherits a set of abstract components, each owning one responsibility:
 
 | Component | Responsibility | Conceptual page |
 | --- | --- | --- |
@@ -43,9 +43,9 @@ Flash loans are handled by a separate shared contract, the [`FlashLoanModule`](/
 
 ## Shared infrastructure
 
-Some contracts are deployed once for a whole Makina Lite deployment and shared by every module.
+Some contracts are deployed once for a whole MakinaX deployment and shared by every module.
 
-- The [`MakinaLiteRegistry`](/contracts/registry/MakinaLiteRegistry.sol/contract.MakinaLiteRegistry) is the single source of truth for shared addresses: the factory, the module implementation used for cloning, the fee collector that receives swap fees, the `FlashLoanModule`, and the bridge encoders (indexed by bridge ID).
+- The [`MakinaXRegistry`](/contracts/registry/MakinaXRegistry.sol/contract.MakinaXRegistry) is the single source of truth for shared addresses: the factory, the module implementation used for cloning, the fee collector that receives swap fees, the `FlashLoanModule`, and the bridge encoders (indexed by bridge ID).
 - The [`ModuleFactory`](/contracts/factory/ModuleFactory.sol/contract.ModuleFactory) deploys new modules as [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal clones.
 - The **Bridge Encoders** ([`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder), [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder), [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder)) are singletons that build the bridge-specific calldata and hold per-bridge route and registration data.
 
@@ -53,7 +53,7 @@ These infrastructure contracts are upgradeable and use [OpenZeppelin AccessManag
 
 ## Fund custody: the single chokepoint
 
-The most important architectural fact in Makina Lite is that **the module does not hold funds**.
+The most important architectural fact in MakinaX is that **the module does not hold funds**.
 
 Every value-moving operation follows the same shape:
 
@@ -81,7 +81,7 @@ sequenceDiagram
 | Term | Meaning |
 | --- | --- |
 | **Safe** | The Gnosis Safe multisig that owns the funds and the module. The sole configuration authority. |
-| **Module** | An instance of `MakinaLiteModule`, installed on one Safe. The constrained automation layer. |
+| **Module** | An instance of `MakinaXModule`, installed on one Safe. The constrained automation layer. |
 | **Operator** | An address the Safe authorizes to execute strategy actions through the module. Holds no configuration power. |
 | **Provider** | A protocol service account that sets the swap fee rate and can suspend the module. |
 | **Guardian** | An address that can pause and unpause the module. The Safe is always a Guardian. |

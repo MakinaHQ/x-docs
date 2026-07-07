@@ -1,17 +1,17 @@
 # Token Bridging
 
-Bridging lets a strategy move tokens to another chain. Makina Lite bridging is **outbound only**. The module can send tokens cross-chain, but it does not track, value, or reconcile anything on the destination chain. There is no cross-chain accounting in Makina Lite. For the exact rules, see [`BridgeComponent`](/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent) in the Contracts reference.
+Bridging lets a strategy move tokens to another chain. MakinaX bridging is **outbound only**. The module can send tokens cross-chain, but it does not track, value, or reconcile anything on the destination chain. There is no cross-chain accounting in MakinaX. For the exact rules, see [`BridgeComponent`](/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent) in the Contracts reference.
 
 ## The encoder model
 
-Every bridge exposes a different interface. Rather than hard-code each one into the module, Makina Lite handles them through **bridge encoders**: shared, single-instance contracts, one per bridge. Each encoder stores miscellaneous routing configuration data and crafts the calldata for requested transfers.
+Every bridge exposes a different interface. Rather than hard-code each one into the module, MakinaX handles them through **bridge encoders**: shared, single-instance contracts, one per bridge. Each encoder stores miscellaneous routing configuration data and crafts the calldata for requested transfers.
 
 In order to send a transfer, the module pulls the input token from the Safe onto the module, requests calldata and target from the relevant encoder, and then performs the external call (approving and revoking around it if the bridge needs an allowance, and forwarding any required native value).
 
 ```mermaid
 flowchart TB
-    Op([Operator]) -- "1. bridge order (bridgeId, dest, recipient, ...)" --> Module["MakinaLiteModule<br/>(bridge component)"]:::core
-    Module -- "2. resolve by bridgeId" --> Reg["MakinaLiteRegistry"]:::core
+    Op([Operator]) -- "1. bridge order (bridgeId, dest, recipient, ...)" --> Module["MakinaXModule<br/>(bridge component)"]:::core
+    Module -- "2. resolve by bridgeId" --> Reg["MakinaXRegistry"]:::core
     Reg -- "3. encoder address" --> Module
     Module -- "4. getBridgeTransferData(order)" --> Enc["Bridge encoder<br/>(builds calldata + target)"]:::core
     Module -- "5. approve / call+value / revoke" --> Bridge[(External bridge)]:::ext
@@ -32,7 +32,7 @@ In `FENCED` or `WALLED` mode, outbound transfers enforce:
 - **Cooldown.** Each bridge ID has its own independent cooldown clock. A transfer through a bridge is rejected until that bridge's cooldown has elapsed since its previous transfer.
 
 :::warning[Recipients must be plain custody addresses]
-A whitelisted recipient must be an address the same party controls and can custody the asset with on the destination chain. It must never be a Makina Lite module address on any chain. A module set as a recipient can have a pending inbound transfer settled into it by an attacker who gains control mid-operation, inflating its measured balances and masking a loss elsewhere. See the [Risk Model](/concepts/risk-model).
+A whitelisted recipient must be an address the same party controls and can custody the asset with on the destination chain. It must never be a MakinaX module address on any chain. A module set as a recipient can have a pending inbound transfer settled into it by an attacker who gains control mid-operation, inflating its measured balances and masking a loss elsewhere. See the [Risk Model](/concepts/risk-model).
 :::
 
 ## Supported bridges

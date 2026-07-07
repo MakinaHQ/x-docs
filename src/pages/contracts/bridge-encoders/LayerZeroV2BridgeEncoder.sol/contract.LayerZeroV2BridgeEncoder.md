@@ -1,5 +1,5 @@
 # LayerZeroV2BridgeEncoder
-[Git Source](https://github.com/MakinaHQ/makina-lite/blob/626b74d20627999f2962c61cb40e282d31cd7f23/src/bridge-encoders/LayerZeroV2BridgeEncoder.sol)
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/43737945b99e87740e2a58b7a320c78a5d628e4b/src/bridge-encoders/LayerZeroV2BridgeEncoder.sol)
 
 **Inherits:**
 AccessManagedUpgradeable, [ILayerZeroV2BridgeEncoder](/contracts/interfaces/ILayerZeroV2BridgeEncoder.sol/interface.ILayerZeroV2BridgeEncoder.md)
@@ -63,7 +63,7 @@ function getLzEndpointId(uint256 evmChainId) public view override returns (uint3
 
 Returns targets, value, and calldata to execute a bridge transfer.
 
-Intended to be called only by a MakinaLiteModule instance, from which implementations may read caller state via `msg.sender`.
+Intended to be called only by a MakinaXModule instance, from which implementations may read caller state via `msg.sender`.
 
 
 ```solidity
@@ -143,4 +143,3 @@ Internal logic to craft lzReceive option.
 ```solidity
 function _getLzReceiveOption(uint128 _lzReceiveGas) internal pure returns (bytes memory);
 ```
-
