@@ -1,5 +1,5 @@
 import { Changelog, defineConfig } from "vocs/config";
-import { generateSidebar } from "./sidebar.js";
+import { contractsSidebar } from "./sidebar.generated.js";
 
 export default defineConfig({
   changelog: Changelog.github({ repo: "MakinaHQ/makina-x" }),
@@ -88,7 +88,7 @@ export default defineConfig({
       },
       { text: "Risk Model", link: "/concepts/risk-model" },
     ],
-    "/contracts": generateSidebar("contracts"),
+    "/contracts": contractsSidebar,
   },
   socials: [
     { icon: "github", link: "https://github.com/MakinaHQ/makina-x" },
