@@ -88,6 +88,7 @@ export default defineConfig({
       },
       { text: "Risk Model", link: "/concepts/risk-model" },
     ],
+    "/configure": [{ text: "Configuration", link: "/configure" }],
     "/contracts": contractsSidebar,
   },
   socials: [
