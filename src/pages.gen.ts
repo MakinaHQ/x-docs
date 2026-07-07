@@ -19,6 +19,7 @@ type Page =
   | { path: '/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder'; render: 'static' }
   | { path: '/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder'; render: 'static' }
   | { path: '/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder'; render: 'static' }
+  | { path: '/contracts/changelog'; render: 'static' }
   | { path: '/contracts/deployments'; render: 'static' }
   | { path: '/contracts/factory/ModuleFactory.sol/contract.ModuleFactory'; render: 'static' }
   | { path: '/contracts/flash-loans/FlashLoanModule.sol/contract.FlashLoanModule'; render: 'static' }

@@ -1,7 +1,8 @@
-import { defineConfig } from "vocs/config";
+import { Changelog, defineConfig } from "vocs/config";
 import { generateSidebar } from "./sidebar.js";
 
 export default defineConfig({
+  changelog: Changelog.github({ repo: "MakinaHQ/makina-x" }),
   title: "MakinaX Docs",
   description: "Documentation for the MakinaX protocol",
   titleTemplate: "%s | MakinaX Docs",
@@ -57,19 +58,34 @@ export default defineConfig({
   sidebar: {
     "/concepts": [
       { text: "Introduction", link: "/concepts/introduction" },
-      { text: "Architecture Overview", link: "/concepts/architecture/overview" },
-      { text: "Operating Modes", link: "/concepts/architecture/operating-modes" },
+      {
+        text: "Architecture Overview",
+        link: "/concepts/architecture/overview",
+      },
+      {
+        text: "Operating Modes",
+        link: "/concepts/architecture/operating-modes",
+      },
       {
         text: "Operations",
         collapsed: false,
         items: [
-          { text: "Position Management", link: "/concepts/architecture/position-management" },
+          {
+            text: "Position Management",
+            link: "/concepts/architecture/position-management",
+          },
           { text: "Token Swaps", link: "/concepts/architecture/swaps" },
           { text: "Token Bridging", link: "/concepts/architecture/bridging" },
         ],
       },
-      { text: "Pricing & Oracles", link: "/concepts/architecture/pricing-oracles" },
-      { text: "Permissions & Governance", link: "/concepts/permissions-and-governance" },
+      {
+        text: "Pricing & Oracles",
+        link: "/concepts/architecture/pricing-oracles",
+      },
+      {
+        text: "Permissions & Governance",
+        link: "/concepts/permissions-and-governance",
+      },
       { text: "Risk Model", link: "/concepts/risk-model" },
     ],
     "/contracts": generateSidebar("contracts"),

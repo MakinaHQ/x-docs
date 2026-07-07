@@ -2,10 +2,8 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import { vocs } from "vocs/vite";
 
-// to fix: https://github.com/wevm/vocs/issues/450
-// not needed once fixed
 export default defineConfig(async () => ({
-  plugins: [react(), vocs({})],
+  plugins: [react(), vocs()],
   // Mermaid is loaded via a dynamic import in Vocs' client component. Its
   // transitive `dayjs` dependency ships as UMD, which Vite's dev optimizer
   // otherwise serves without a `default` export ("does not provide an export
