@@ -59,8 +59,9 @@ Every oracle-priced guard inherits the oracle's integrity assumptions: honest Ch
 
 - **The Safe is the single most powerful actor.** Compromise of the Safe is compromise of the module's entire strategy execution, bounded only by the instruction root the Safe itself set. There is no module-level timelock, so the Safe's multisig threshold is the defense.
 - **Mode downgrade is instant.** Moving from `WALLED` to `OPEN` removes every economic guard in one transaction. See [Operating Modes](/concepts/architecture/operating-modes).
-- **Infrastructure compromise is protocol-wide but time-bounded.** The shared `AccessManager` roles control singletons (encoders, fee collector, flash-loan module, implementation) that every module relies on, so their blast radius spans the whole deployment. The configuration and upgrade roles carry execution delays during which the Security Council can cancel, while `ADMIN_ROLE` carries a delay but no guardian. See [Infrastructure roles](/concepts/permissions-and-governance#infrastructure-roles).
+- **Infrastructure compromise is protocol-wide but time-bounded.** The `AccessManager` roles control singletons (encoders, fee collector, flash-loan module, implementation) that every module relies on, so their blast radius spans the whole deployment. The configuration and upgrade roles carry execution delays during which the Security Council can cancel a scheduled operation, while `ADMIN_ROLE` carries a delay but no guardian. See [Infrastructure roles](/concepts/permissions-and-governance#infrastructure-roles).
 - **Provider availability.** The Provider role can be transferred to an unusable address, after which the fee, suspend, and unsuspend functions can no longer be called.
+- **Permissionless deployment fixes the Provider.** A module deployed through the permissionless path receives the factory's default Provider and swap fee rate rather than choosing them, so its Safe does not pick the party it trusts with swap proceeds. See [Module deployment](/concepts/permissions-and-governance#module-deployment).
 
 ## Integration risks
 

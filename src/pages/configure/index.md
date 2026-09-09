@@ -41,13 +41,13 @@ These bound the economic outcome of operations in guarded modes. All loss limits
 
 ## Recovery
 
-| Parameter                    | What it controls                                                          |
-| ---------------------------- | ------------------------------------------------------------------------- |
-| `sweepERC20` / `sweepNative` | Returns any ERC-20 or native balance held by the module back to the Safe. |
+| Parameter                                                     | What it controls                                                                              |
+| ------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `sweepERC20` / `sweepERC721` / `sweepERC6909` / `sweepNative` | Returns any ERC-20, ERC-721, ERC-6909, or native balance held by the module back to the Safe. |
 
 ## Provider-held parameters
 
-These are set by the Provider, not the Safe. The Provider holds no power over strategy configuration or funds.
+These are set by the Provider, not the Safe. The Provider holds no power over strategy configuration or funds. The initial Provider and swap fee rate are fixed at deployment: supplied by the deployer on the permissioned path, or set to the factory defaults on the permissionless path. See [Module deployment](/concepts/permissions-and-governance#module-deployment).
 
 | Parameter               | What it controls                                                                     |
 | ----------------------- | ------------------------------------------------------------------------------------ |

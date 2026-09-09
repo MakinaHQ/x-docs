@@ -46,7 +46,7 @@ Flash loans are handled by a separate shared contract, the [`FlashLoanModule`](/
 Some contracts are deployed once for a whole MakinaX deployment and shared by every module.
 
 - The [`MakinaXRegistry`](/contracts/registry/contract.MakinaXRegistry) is the single source of truth for shared addresses: the factory, the module implementation used for cloning, the fee collector that receives swap fees, the `FlashLoanModule`, and the bridge encoders (indexed by bridge ID).
-- The [`ModuleFactory`](/contracts/factory/contract.ModuleFactory) deploys new modules as [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal clones.
+- The [`ModuleFactory`](/contracts/factory/contract.ModuleFactory) deploys new modules as [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal clones, through a permissioned path for authorized deployers and, when enabled, a permissionless path open to anyone. See [Module deployment](/concepts/permissions-and-governance#module-deployment).
 - The **Bridge Encoders** ([`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder), [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/contract.CctpV2BridgeEncoder), [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder)) are singletons that build the bridge-specific calldata and hold per-bridge route and registration data.
 
 These infrastructure contracts are upgradeable and use [OpenZeppelin AccessManager](https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManager) for authorization, a separate trust domain from the per-Safe module roles. See [Permissions & Governance](/concepts/permissions-and-governance).
@@ -61,7 +61,7 @@ Every value-moving operation follows the same shape:
 2. **Act** (swap, bridge, manage a position, repay a flash loan).
 3. **Return** the output to the Safe within the same transaction.
 
-All token movement out of the Safe through the module passes through a single internal pull function, or runs as a delegatecall inside the Safe. The module is meant to hold nothing between operations, but a few things can still land on it, such as dust from an integration or the small native-gas buffers some bridge transfers need (LayerZero, for example). Safe-only sweep functions let the Safe recover whatever does.
+All token movement out of the Safe through the module passes through a single internal pull function, or runs as a delegatecall inside the Safe. The module is meant to hold nothing between operations, but a few things can still land on it, such as dust from an integration or the small native-gas buffers some bridge transfers need (LayerZero, for example). Safe-only sweep functions let the Safe recover whatever does, whether an ERC-20, ERC-721, or ERC-6909 token or native balance.
 
 ```mermaid
 sequenceDiagram
