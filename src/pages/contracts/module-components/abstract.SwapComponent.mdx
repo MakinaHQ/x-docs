@@ -1,0 +1,263 @@
+---
+title: "SwapComponent"
+---
+
+# SwapComponent
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/module-components/SwapComponent.sol)
+
+**Inherits:** [ISwapComponent](/contracts/interfaces/interface.ISwapComponent)
+
+## Constants
+
+### MAX_BPS
+
+<i>
+
+Full scale value in basis points.
+
+</i>
+
+```solidity
+uint256 private constant MAX_BPS = 10_000;
+```
+
+## State Variables
+
+### _swapperTargets
+
+```solidity
+mapping(uint16 swapperId => SwapperTargets targets) private _swapperTargets;
+```
+
+### _lastGuardedSwapTimestamp
+
+```solidity
+uint256 private _lastGuardedSwapTimestamp;
+```
+
+### maxSwapLossBps
+
+Max allowed value loss (in basis points) for token swaps while in FENCED or WALLED mode.
+
+```solidity
+uint256 public maxSwapLossBps;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+### swapCooldownDuration
+
+Cooldown duration (in seconds) for token swaps while in FENCED or WALLED mode.
+
+```solidity
+uint256 public swapCooldownDuration;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+### swapFeeRate
+
+Swap fee rate, 1e18 = 100%.
+
+```solidity
+uint256 public swapFeeRate;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+## Functions
+
+<a id="getswappertargets-uint16"></a>
+
+### getSwapperTargets
+
+Returns approval and execution targets for a given swapper ID.
+
+```solidity
+function getSwapperTargets(uint16 swapperId)
+        external
+        view
+        returns (address approvalTarget, address executionTarget);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` | The swapper ID. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| approvalTarget | `address` | The approval target. |
+| executionTarget | `address` | The execution target. |
+
+<a id="_swap-swaporder-bool"></a>
+
+### _swap
+
+<i>
+
+Internal logic to swap tokens using a given swapper.
+
+</i>
+
+```solidity
+function _swap(SwapOrder calldata order, bool guarded) internal returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `SwapOrder` |  |
+| guarded | `bool` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_setmaxswaplossbps-uint256"></a>
+
+### _setMaxSwapLossBps
+
+<i>
+
+Internal logic to set the maximum allowed relative value loss for token swaps.
+
+</i>
+
+```solidity
+function _setMaxSwapLossBps(uint256 newMaxSwapLossBps) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxSwapLossBps | `uint256` |  |
+
+<a id="_setswapcooldownduration-uint256"></a>
+
+### _setSwapCooldownDuration
+
+<i>
+
+Internal logic to set the swap cooldown duration.
+
+</i>
+
+```solidity
+function _setSwapCooldownDuration(uint256 newSwapCooldownDuration) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapCooldownDuration | `uint256` |  |
+
+<a id="_setswapfeerate-uint256"></a>
+
+### _setSwapFeeRate
+
+<i>
+
+Internal logic to set the swap fee rate.
+
+</i>
+
+```solidity
+function _setSwapFeeRate(uint256 newSwapFeeRate) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapFeeRate | `uint256` |  |
+
+<a id="_setswappertargets-uint16-address-address"></a>
+
+### _setSwapperTargets
+
+<i>
+
+Internal logic to set approval and execution targets for a given swapper ID.
+
+</i>
+
+```solidity
+function _setSwapperTargets(uint16 swapperId, address approvalTarget, address executionTarget) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` |  |
+| approvalTarget | `address` |  |
+| executionTarget | `address` |  |
+
+<a id="_checkandsetcooldown"></a>
+
+### _checkAndSetCooldown
+
+<i>
+
+Checks cooldown for swaps and updates the last guarded swap timestamp.
+
+</i>
+
+```solidity
+function _checkAndSetCooldown() internal;
+```
+
+<a id="_valueof-address-address-uint256"></a>
+
+### _valueOf
+
+<i>
+
+Returns the value of `baseTokenAmount` of `baseToken` denominated in `quoteToken`, using the registered price route.
+
+</i>
+
+```solidity
+function _valueOf(address baseToken, address quoteToken, uint256 baseTokenAmount)
+        internal
+        view
+        virtual
+        returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseToken | `address` |  |
+| quoteToken | `address` |  |
+| baseTokenAmount | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+

@@ -29,7 +29,7 @@ A module operates on a single chain. Cross-chain movement is **outbound bridging
 
 ## What the module composes
 
-[`MakinaXModule`](/contracts/MakinaXModule.sol/contract.MakinaXModule) is the single concrete contract. It inherits a set of abstract components, each owning one responsibility:
+[`MakinaXModule`](/contracts/contract.MakinaXModule) is the single concrete contract. It inherits a set of abstract components, each owning one responsibility:
 
 | Component | Responsibility | Conceptual page |
 | --- | --- | --- |
@@ -39,15 +39,15 @@ A module operates on a single chain. Cross-chain movement is **outbound bridging
 | **Oracle registry** | Price tokens through Chainlink-compatible feeds, the backbone of every loss check. | [Pricing & Oracles](/concepts/architecture/pricing-oracles) |
 | **Governable** | Module-level roles, the pause and suspend halts, and the operating mode. | [Permissions & Governance](/concepts/permissions-and-governance) |
 
-Flash loans are handled by a separate shared contract, the [`FlashLoanModule`](/contracts/flash-loans/FlashLoanModule.sol/contract.FlashLoanModule), used only inside flash-loan-assisted position management. See [Flash-loan-assisted management](/concepts/architecture/position-management#flash-loan-assisted-management).
+Flash loans are handled by a separate shared contract, the [`FlashLoanModule`](/contracts/flash-loans/contract.FlashLoanModule), used only inside flash-loan-assisted position management. See [Flash-loan-assisted management](/concepts/architecture/position-management#flash-loan-assisted-management).
 
 ## Shared infrastructure
 
 Some contracts are deployed once for a whole MakinaX deployment and shared by every module.
 
-- The [`MakinaXRegistry`](/contracts/registry/MakinaXRegistry.sol/contract.MakinaXRegistry) is the single source of truth for shared addresses: the factory, the module implementation used for cloning, the fee collector that receives swap fees, the `FlashLoanModule`, and the bridge encoders (indexed by bridge ID).
-- The [`ModuleFactory`](/contracts/factory/ModuleFactory.sol/contract.ModuleFactory) deploys new modules as [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal clones.
-- The **Bridge Encoders** ([`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder), [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder), [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder)) are singletons that build the bridge-specific calldata and hold per-bridge route and registration data.
+- The [`MakinaXRegistry`](/contracts/registry/contract.MakinaXRegistry) is the single source of truth for shared addresses: the factory, the module implementation used for cloning, the fee collector that receives swap fees, the `FlashLoanModule`, and the bridge encoders (indexed by bridge ID).
+- The [`ModuleFactory`](/contracts/factory/contract.ModuleFactory) deploys new modules as [ERC-1167](https://eips.ethereum.org/EIPS/eip-1167) minimal clones.
+- The **Bridge Encoders** ([`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder), [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/contract.CctpV2BridgeEncoder), [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder)) are singletons that build the bridge-specific calldata and hold per-bridge route and registration data.
 
 These infrastructure contracts are upgradeable and use [OpenZeppelin AccessManager](https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManager) for authorization, a separate trust domain from the per-Safe module roles. See [Permissions & Governance](/concepts/permissions-and-governance).
 

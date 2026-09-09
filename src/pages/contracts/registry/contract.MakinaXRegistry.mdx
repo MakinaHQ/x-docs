@@ -1,0 +1,201 @@
+---
+title: "MakinaXRegistry"
+---
+
+# MakinaXRegistry
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/registry/MakinaXRegistry.sol)
+
+**Inherits:** AccessManagedUpgradeable, [IMakinaXRegistry](/contracts/interfaces/interface.IMakinaXRegistry)
+
+## State Variables
+
+### moduleFactory
+
+Address of the MakinaXModule factory.
+
+```solidity
+address public moduleFactory;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### moduleImplementation
+
+Address of the MakinaXModule implementation.
+
+```solidity
+address public moduleImplementation;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### feeCollector
+
+Address of the fee collector.
+
+```solidity
+address public feeCollector;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### flashLoanModule
+
+Address of the flash loan module.
+
+```solidity
+address public flashLoanModule;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### _bridgeEncoders
+
+```solidity
+mapping(uint16 bridgeId => address encoder) private _bridgeEncoders;
+```
+
+## Functions
+
+<a id="constructor"></a>
+
+### constructor
+
+```solidity
+constructor();
+```
+
+<a id="initialize-address"></a>
+
+### initialize
+
+```solidity
+function initialize(address initialAuthority) external initializer;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| initialAuthority | `address` |  |
+
+<a id="getbridgeencoder-uint16"></a>
+
+### getBridgeEncoder
+
+Bridge ID => Address of the corresponding bridge encoder.
+
+```solidity
+function getBridgeEncoder(uint16 bridgeId) external view returns (address);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="setmodulefactory-address"></a>
+
+### setModuleFactory
+
+Sets the address of the MakinaXModule factory.
+
+```solidity
+function setModuleFactory(address newModuleFactory) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newModuleFactory | `address` | The address of the new MakinaXModule factory. |
+
+<a id="setmoduleimplementation-address"></a>
+
+### setModuleImplementation
+
+Sets the MakinaXModule implementation for future deployments.
+
+```solidity
+function setModuleImplementation(address newImplementation) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newImplementation | `address` | The address of the new implementation contract. |
+
+<a id="setfeecollector-address"></a>
+
+### setFeeCollector
+
+Sets the address of the fee collector.
+
+```solidity
+function setFeeCollector(address newFeeCollector) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newFeeCollector | `address` | The address of the new fee collector. |
+
+<a id="setflashloanmodule-address"></a>
+
+### setFlashLoanModule
+
+Sets the address of the flash loan module.
+
+```solidity
+function setFlashLoanModule(address newFlashLoanModule) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newFlashLoanModule | `address` | The address of the new flash loan module. |
+
+<a id="setbridgeencoder-uint16-address"></a>
+
+### setBridgeEncoder
+
+Sets a bridge encoder instance for a given bridge ID.
+
+```solidity
+function setBridgeEncoder(uint16 bridgeId, address bridgeEncoder) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` | The ID of the bridge. |
+| bridgeEncoder | `address` | The address of the new bridge encoder instance. |
+

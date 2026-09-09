@@ -1,6 +1,6 @@
 # Token Bridging
 
-Bridging lets a strategy move tokens to another chain. MakinaX bridging is **outbound only**. The module can send tokens cross-chain, but it does not track, value, or reconcile anything on the destination chain. There is no cross-chain accounting in MakinaX. For the exact rules, see [`BridgeComponent`](/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent) in the Contracts reference.
+Bridging lets a strategy move tokens to another chain. MakinaX bridging is **outbound only**. The module can send tokens cross-chain, but it does not track, value, or reconcile anything on the destination chain. There is no cross-chain accounting in MakinaX. For the exact rules, see [`BridgeComponent`](/contracts/module-components/abstract.BridgeComponent) in the Contracts reference.
 
 ## The encoder model
 
@@ -39,9 +39,9 @@ A whitelisted recipient must be an address the same party controls and can custo
 
 | Bridge | Encoder | Routing model |
 | --- | --- | --- |
-| **Across V4** | [`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder) | Input-to-output token routes, per destination chain. |
-| **Circle CCTP V2** | [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder) | Maps EVM chain IDs to CCTP domains. |
-| **LayerZero V2** | [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder) | OFT standard. Chain-ID-to-endpoint-ID mappings and an allowlist of OFTs. |
+| **Across V4** | [`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder) | Input-to-output token routes, per destination chain. |
+| **Circle CCTP V2** | [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/contract.CctpV2BridgeEncoder) | Maps EVM chain IDs to CCTP domains. |
+| **LayerZero V2** | [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder) | OFT standard. Chain-ID-to-endpoint-ID mappings and an allowlist of OFTs. |
 
 ## The native gas buffer
 

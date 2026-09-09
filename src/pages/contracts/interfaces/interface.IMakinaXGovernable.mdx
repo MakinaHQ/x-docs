@@ -1,0 +1,403 @@
+---
+title: "IMakinaXGovernable"
+---
+
+# IMakinaXGovernable
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/IMakinaXGovernable.sol)
+
+## Functions
+
+<a id="safe"></a>
+
+### safe
+
+Address of the Safe.
+
+```solidity
+function safe() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="provider"></a>
+
+### provider
+
+Address of the MakinaX service account.
+
+```solidity
+function provider() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="isoperator-address"></a>
+
+### isOperator
+
+Account => Whether the account is an operator.
+
+```solidity
+function isOperator(address account) external view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| account | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="isguardian-address"></a>
+
+### isGuardian
+
+Account => Whether the account is a guardian.
+
+```solidity
+function isGuardian(address account) external view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| account | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="operatingmode"></a>
+
+### operatingMode
+
+Current operating mode of the contract.
+
+```solidity
+function operatingMode() external view returns (OperatingMode);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `OperatingMode` |  |
+
+<a id="suspendedbyprovider"></a>
+
+### suspendedByProvider
+
+True if the contract is suspended by the provider, false otherwise.
+
+```solidity
+function suspendedByProvider() external view returns (bool);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="paused"></a>
+
+### paused
+
+True if the contract is paused by a guardian, false otherwise.
+
+```solidity
+function paused() external view returns (bool);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="setprovider-address"></a>
+
+### setProvider
+
+Sets the provider address.
+
+```solidity
+function setProvider(address newProvider) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newProvider | `address` | The address of the new provider. |
+
+<a id="addoperator-address"></a>
+
+### addOperator
+
+Adds a new operator.
+
+```solidity
+function addOperator(address newOperator) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newOperator | `address` | The address of the new operator. |
+
+<a id="removeoperator-address"></a>
+
+### removeOperator
+
+Removes an operator.
+
+```solidity
+function removeOperator(address operator) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| operator | `address` | The address of the operator to remove. |
+
+<a id="addguardian-address"></a>
+
+### addGuardian
+
+Adds a new guardian.
+
+```solidity
+function addGuardian(address newGuardian) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newGuardian | `address` | The address of the new guardian. |
+
+<a id="removeguardian-address"></a>
+
+### removeGuardian
+
+Removes a guardian.
+
+```solidity
+function removeGuardian(address guardian) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guardian | `address` | The address of the guardian to remove. |
+
+<a id="setoperatingmode-operatingmode"></a>
+
+### setOperatingMode
+
+Sets the operating mode.
+
+```solidity
+function setOperatingMode(OperatingMode newMode) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMode | `OperatingMode` | The operating mode to set. |
+
+<a id="suspend"></a>
+
+### suspend
+
+Suspends operations. Used by the provider to enforce service restrictions.
+
+```solidity
+function suspend() external;
+```
+
+<a id="unsuspend"></a>
+
+### unsuspend
+
+Restores operations after a provider suspension.
+
+```solidity
+function unsuspend() external;
+```
+
+<a id="pause"></a>
+
+### pause
+
+Pauses operations. Used by a guardian in case of emergency.
+
+```solidity
+function pause() external;
+```
+
+<a id="unpause"></a>
+
+### unpause
+
+Unpauses operations after an emergency pause.
+
+```solidity
+function unpause() external;
+```
+
+## Events
+
+### GuardianAdded
+
+```solidity
+event GuardianAdded(address indexed newGuardian);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newGuardian | `address` |  |
+
+### GuardianRemoved
+
+```solidity
+event GuardianRemoved(address indexed guardian);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guardian | `address` |  |
+
+### OperatingModeChanged
+
+```solidity
+event OperatingModeChanged(OperatingMode indexed mode);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| mode | `OperatingMode` |  |
+
+### OperatorAdded
+
+```solidity
+event OperatorAdded(address indexed newOperator);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newOperator | `address` |  |
+
+### OperatorRemoved
+
+```solidity
+event OperatorRemoved(address indexed operator);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| operator | `address` |  |
+
+### Paused
+
+```solidity
+event Paused(address indexed guardian);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guardian | `address` |  |
+
+### Unpaused
+
+```solidity
+event Unpaused(address indexed guardian);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guardian | `address` |  |
+
+### ProviderChanged
+
+```solidity
+event ProviderChanged(address indexed oldProvider, address indexed newProvider);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oldProvider | `address` |  |
+| newProvider | `address` |  |
+
+### Suspended
+
+```solidity
+event Suspended();
+```
+
+### Unsuspended
+
+```solidity
+event Unsuspended();
+```
+
+## Enums
+
+### OperatingMode
+
+Operating modes of a module, ordered by increasing restriction.
+
+```solidity
+enum OperatingMode {
+        OPEN,
+        FENCED,
+        WALLED
+    }
+```
+
+**Variants**
+
+| Name | Description |
+| ---- | ----------- |
+| OPEN |  |
+| FENCED |  |
+| WALLED |  |
+

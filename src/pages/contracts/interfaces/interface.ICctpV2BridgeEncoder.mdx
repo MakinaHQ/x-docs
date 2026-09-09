@@ -1,0 +1,82 @@
+---
+title: "ICctpV2BridgeEncoder"
+---
+
+# ICctpV2BridgeEncoder
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/ICctpV2BridgeEncoder.sol)
+
+**Inherits:** [IBridgeEncoder](/contracts/interfaces/interface.IBridgeEncoder)
+
+## Functions
+
+<a id="cctpv2tokenmessenger"></a>
+
+### cctpV2TokenMessenger
+
+Address of the CCTP TokenMessengerV2
+
+```solidity
+function cctpV2TokenMessenger() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="getcctpdomain-uint256"></a>
+
+### getCctpDomain
+
+EVM chain ID => CCTP domain
+
+```solidity
+function getCctpDomain(uint256 evmChainId) external view returns (uint32);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint32` |  |
+
+<a id="setcctpdomain-uint256-uint32"></a>
+
+### setCctpDomain
+
+Associates an EVM chain ID with a CCTP domain in the contract storage.
+
+```solidity
+function setCctpDomain(uint256 evmChainId, uint32 cctpDomain) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` | The EVM chain ID. |
+| cctpDomain | `uint32` | The CCTP domain. |
+
+## Events
+
+### CctpDomainRegistered
+
+```solidity
+event CctpDomainRegistered(uint256 indexed evmChainId, uint32 indexed cctpDomain);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` |  |
+| cctpDomain | `uint32` |  |
+

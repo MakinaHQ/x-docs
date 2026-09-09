@@ -1,0 +1,378 @@
+---
+title: "MakinaXGovernable"
+---
+
+# MakinaXGovernable
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/utils/MakinaXGovernable.sol)
+
+**Inherits:** Initializable, [IMakinaXGovernable](/contracts/interfaces/interface.IMakinaXGovernable)
+
+## State Variables
+
+### safe
+
+Address of the Safe.
+
+```solidity
+address public override safe;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### provider
+
+Address of the MakinaX service account.
+
+```solidity
+address public override provider;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### isOperator
+
+Account => Whether the account is an operator.
+
+```solidity
+mapping(address account => bool isOperator) public override isOperator;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| account | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isOperator | `bool` |  |
+
+### isGuardian
+
+Account => Whether the account is a guardian.
+
+```solidity
+mapping(address account => bool isGuardian) public override isGuardian;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| account | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isGuardian | `bool` |  |
+
+### paused
+
+True if the contract is paused by a guardian, false otherwise.
+
+```solidity
+bool public override paused;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+### suspendedByProvider
+
+True if the contract is suspended by the provider, false otherwise.
+
+```solidity
+bool public override suspendedByProvider;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+### operatingMode
+
+Current operating mode of the contract.
+
+```solidity
+OperatingMode public override operatingMode;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint8` |  |
+
+## Functions
+
+<a id="__makinaxgovernable_init-address-address-operatingmode"></a>
+
+### __MakinaXGovernable_init
+
+```solidity
+function __MakinaXGovernable_init(address _safe, address _provider, OperatingMode _initialOperatingMode)
+        internal
+        onlyInitializing;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _safe | `address` |  |
+| _provider | `address` |  |
+| _initialOperatingMode | `OperatingMode` |  |
+
+<a id="onlysafe"></a>
+
+### onlySafe
+
+```solidity
+modifier onlySafe();
+```
+
+<a id="onlyprovider"></a>
+
+### onlyProvider
+
+```solidity
+modifier onlyProvider();
+```
+
+<a id="onlyoperator"></a>
+
+### onlyOperator
+
+```solidity
+modifier onlyOperator();
+```
+
+<a id="onlyguardian"></a>
+
+### onlyGuardian
+
+```solidity
+modifier onlyGuardian();
+```
+
+<a id="whenoperational"></a>
+
+### whenOperational
+
+```solidity
+modifier whenOperational();
+```
+
+<a id="setprovider-address"></a>
+
+### setProvider
+
+Sets the provider address.
+
+```solidity
+function setProvider(address newProvider) external override onlyProvider;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newProvider | `address` | The address of the new provider. |
+
+<a id="addoperator-address"></a>
+
+### addOperator
+
+Adds a new operator.
+
+```solidity
+function addOperator(address newOperator) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newOperator | `address` | The address of the new operator. |
+
+<a id="removeoperator-address"></a>
+
+### removeOperator
+
+Removes an operator.
+
+```solidity
+function removeOperator(address operator) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| operator | `address` | The address of the operator to remove. |
+
+<a id="addguardian-address"></a>
+
+### addGuardian
+
+Adds a new guardian.
+
+```solidity
+function addGuardian(address newGuardian) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newGuardian | `address` | The address of the new guardian. |
+
+<a id="removeguardian-address"></a>
+
+### removeGuardian
+
+Removes a guardian.
+
+```solidity
+function removeGuardian(address guardian) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guardian | `address` | The address of the guardian to remove. |
+
+<a id="setoperatingmode-operatingmode"></a>
+
+### setOperatingMode
+
+Sets the operating mode.
+
+```solidity
+function setOperatingMode(OperatingMode newMode) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMode | `OperatingMode` | The operating mode to set. |
+
+<a id="suspend"></a>
+
+### suspend
+
+Suspends operations. Used by the provider to enforce service restrictions.
+
+```solidity
+function suspend() external override onlyProvider;
+```
+
+<a id="unsuspend"></a>
+
+### unsuspend
+
+Restores operations after a provider suspension.
+
+```solidity
+function unsuspend() external override onlyProvider;
+```
+
+<a id="pause"></a>
+
+### pause
+
+Pauses operations. Used by a guardian in case of emergency.
+
+```solidity
+function pause() external override onlyGuardian;
+```
+
+<a id="unpause"></a>
+
+### unpause
+
+Unpauses operations after an emergency pause.
+
+```solidity
+function unpause() external override onlyGuardian;
+```
+
+<a id="_setprovider-address"></a>
+
+### _setProvider
+
+<i>
+
+Internal function to update the MakinaX service account.
+
+</i>
+
+```solidity
+function _setProvider(address newProvider) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newProvider | `address` |  |
+
+<a id="_addguardian-address"></a>
+
+### _addGuardian
+
+<i>
+
+Internal logic to add a new guardian.
+
+</i>
+
+```solidity
+function _addGuardian(address newGuardian) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newGuardian | `address` |  |
+
+<a id="_setoperatingmode-operatingmode"></a>
+
+### _setOperatingMode
+
+<i>
+
+Internal logic to update the operating mode.
+
+</i>
+
+```solidity
+function _setOperatingMode(OperatingMode newMode) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMode | `OperatingMode` |  |
+

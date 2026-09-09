@@ -2,7 +2,7 @@
 
 MakinaX has two distinct access-control systems, and keeping them separate is essential to understanding the trust model.
 
-- **Module-level roles** govern a single [`MakinaXModule`](/contracts/MakinaXModule.sol/contract.MakinaXModule) and its Safe. They are simple address mappings and modifiers, implemented in [`MakinaXGovernable`](/contracts/utils/MakinaXGovernable.sol/abstract.MakinaXGovernable).
+- **Module-level roles** govern a single [`MakinaXModule`](/contracts/contract.MakinaXModule) and its Safe. They are simple address mappings and modifiers, implemented in [`MakinaXGovernable`](/contracts/utils/abstract.MakinaXGovernable).
 - **Infrastructure roles** govern the shared contracts (`MakinaXRegistry`, `ModuleFactory`, and the bridge encoders) through an [OpenZeppelin AccessManager](https://docs.openzeppelin.com/contracts/5.x/api/access#AccessManager).
 
 The two domains meet only at well-defined seams: modules read shared addresses from the registry, the factory mints modules, and bridge encoders read the calling module's operating mode.

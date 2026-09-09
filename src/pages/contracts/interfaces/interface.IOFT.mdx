@@ -1,0 +1,220 @@
+---
+title: "IOFT"
+---
+
+# IOFT
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/IOFT.sol)
+
+## Functions
+
+<a id="token"></a>
+
+### token
+
+```solidity
+function token() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="approvalrequired"></a>
+
+### approvalRequired
+
+```solidity
+function approvalRequired() external view returns (bool);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="quoteoft-sendparam"></a>
+
+### quoteOFT
+
+```solidity
+function quoteOFT(SendParam calldata _sendParam)
+        external
+        view
+        returns (OFTLimit memory, OFTFeeDetail[] memory oftFeeDetails, OFTReceipt memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _sendParam | `SendParam` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `OFTLimit` |  |
+| oftFeeDetails | `OFTFeeDetail[]` |  |
+| &lt;none&gt; | `OFTReceipt` |  |
+
+<a id="quotesend-sendparam-bool"></a>
+
+### quoteSend
+
+```solidity
+function quoteSend(SendParam calldata _sendParam, bool _payInLzToken) external view returns (MessagingFee memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _sendParam | `SendParam` |  |
+| _payInLzToken | `bool` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `MessagingFee` |  |
+
+<a id="send-sendparam-messagingfee-address"></a>
+
+### send
+
+```solidity
+function send(SendParam calldata _sendParam, MessagingFee calldata _fee, address _refundAddress)
+        external
+        payable
+        returns (MessagingReceipt memory, OFTReceipt memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _sendParam | `SendParam` |  |
+| _fee | `MessagingFee` |  |
+| _refundAddress | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `MessagingReceipt` |  |
+| &lt;none&gt; | `OFTReceipt` |  |
+
+## Structs
+
+### MessagingReceipt
+
+```solidity
+struct MessagingReceipt {
+        bytes32 guid;
+        uint64 nonce;
+        MessagingFee fee;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| guid | `bytes32` |  |
+| nonce | `uint64` |  |
+| fee | `MessagingFee` |  |
+
+### MessagingFee
+
+```solidity
+struct MessagingFee {
+        uint256 nativeFee;
+        uint256 lzTokenFee;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| nativeFee | `uint256` |  |
+| lzTokenFee | `uint256` |  |
+
+### SendParam
+
+```solidity
+struct SendParam {
+        uint32 dstEid;
+        bytes32 to;
+        uint256 amountLD;
+        uint256 minAmountLD;
+        bytes extraOptions;
+        bytes composeMsg;
+        bytes oftCmd;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| dstEid | `uint32` |  |
+| to | `bytes32` |  |
+| amountLD | `uint256` |  |
+| minAmountLD | `uint256` |  |
+| extraOptions | `bytes` |  |
+| composeMsg | `bytes` |  |
+| oftCmd | `bytes` |  |
+
+### OFTLimit
+
+```solidity
+struct OFTLimit {
+        uint256 minAmountLD;
+        uint256 maxAmountLD;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| minAmountLD | `uint256` |  |
+| maxAmountLD | `uint256` |  |
+
+### OFTReceipt
+
+```solidity
+struct OFTReceipt {
+        uint256 amountSentLD;
+        uint256 amountReceivedLD;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| amountSentLD | `uint256` |  |
+| amountReceivedLD | `uint256` |  |
+
+### OFTFeeDetail
+
+```solidity
+struct OFTFeeDetail {
+        int256 feeAmountLD;
+        string description;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feeAmountLD | `int256` |  |
+| description | `string` |  |
+

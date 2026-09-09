@@ -1,0 +1,74 @@
+---
+title: "ICctpV2TokenMessenger"
+---
+
+# ICctpV2TokenMessenger
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/ICctpV2TokenMessenger.sol)
+
+## Functions
+
+<a id="localminter"></a>
+
+### localMinter
+
+```solidity
+function localMinter() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="getminfeeamount-uint256"></a>
+
+### getMinFeeAmount
+
+```solidity
+function getMinFeeAmount(uint256 amount) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| amount | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="depositforburnwithhook-uint256-uint32-bytes32-address-bytes32-uint256-uint32-bytes"></a>
+
+### depositForBurnWithHook
+
+```solidity
+function depositForBurnWithHook(
+        uint256 amount,
+        uint32 destinationDomain,
+        bytes32 mintRecipient,
+        address burnToken,
+        bytes32 destinationCaller,
+        uint256 maxFee,
+        uint32 minFinalityThreshold,
+        bytes calldata hookData
+    ) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| amount | `uint256` |  |
+| destinationDomain | `uint32` |  |
+| mintRecipient | `bytes32` |  |
+| burnToken | `address` |  |
+| destinationCaller | `bytes32` |  |
+| maxFee | `uint256` |  |
+| minFinalityThreshold | `uint32` |  |
+| hookData | `bytes` |  |
+

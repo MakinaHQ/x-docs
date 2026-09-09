@@ -1,0 +1,216 @@
+---
+title: "AggregatorV2V3Interface"
+description: "This interface is a combination of Chainlink's AggregatorInterface.sol and AggregatorV3Interface.sol."
+---
+
+# AggregatorV2V3Interface
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/AggregatorV2V3Interface.sol)
+
+This interface is a combination of Chainlink's AggregatorInterface.sol
+and AggregatorV3Interface.sol.
+
+## Functions
+
+<a id="latestanswer"></a>
+
+### latestAnswer
+
+```solidity
+function latestAnswer() external view returns (int256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `int256` |  |
+
+<a id="latesttimestamp"></a>
+
+### latestTimestamp
+
+```solidity
+function latestTimestamp() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="latestround"></a>
+
+### latestRound
+
+```solidity
+function latestRound() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="getanswer-uint256"></a>
+
+### getAnswer
+
+```solidity
+function getAnswer(uint256 roundId) external view returns (int256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| roundId | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `int256` |  |
+
+<a id="gettimestamp-uint256"></a>
+
+### getTimestamp
+
+```solidity
+function getTimestamp(uint256 roundId) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| roundId | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="decimals"></a>
+
+### decimals
+
+```solidity
+function decimals() external view returns (uint8);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint8` |  |
+
+<a id="description"></a>
+
+### description
+
+```solidity
+function description() external view returns (string memory);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `string` |  |
+
+<a id="version"></a>
+
+### version
+
+```solidity
+function version() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="getrounddata-uint80"></a>
+
+### getRoundData
+
+```solidity
+function getRoundData(uint80 _roundId)
+        external
+        view
+        returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _roundId | `uint80` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| roundId | `uint80` |  |
+| answer | `int256` |  |
+| startedAt | `uint256` |  |
+| updatedAt | `uint256` |  |
+| answeredInRound | `uint80` |  |
+
+<a id="latestrounddata"></a>
+
+### latestRoundData
+
+```solidity
+function latestRoundData()
+        external
+        view
+        returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| roundId | `uint80` |  |
+| answer | `int256` |  |
+| startedAt | `uint256` |  |
+| updatedAt | `uint256` |  |
+| answeredInRound | `uint80` |  |
+
+## Events
+
+### AnswerUpdated
+
+```solidity
+event AnswerUpdated(int256 indexed current, uint256 indexed roundId, uint256 timestamp);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| current | `int256` |  |
+| roundId | `uint256` |  |
+| timestamp | `uint256` |  |
+
+### NewRound
+
+```solidity
+event NewRound(uint256 indexed roundId, address indexed startedBy, uint256 startedAt);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| roundId | `uint256` |  |
+| startedBy | `address` |  |
+| startedAt | `uint256` |  |
+

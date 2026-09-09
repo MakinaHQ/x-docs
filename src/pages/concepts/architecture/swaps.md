@@ -1,6 +1,6 @@
 # Token Swaps
 
-A strategy can swap tokens through external DEX aggregators. As elsewhere in MakinaX, the swap component measures the realized output rather than trusting what the aggregator reports. In `FENCED` and `WALLED` mode it additionally bounds that output against an oracle-priced fair value. For the exact rules, see [`SwapComponent`](/contracts/module-components/SwapComponent.sol/abstract.SwapComponent) in the Contracts reference.
+A strategy can swap tokens through external DEX aggregators. As elsewhere in MakinaX, the swap component measures the realized output rather than trusting what the aggregator reports. In `FENCED` and `WALLED` mode it additionally bounds that output against an oracle-priced fair value. For the exact rules, see [`SwapComponent`](/contracts/module-components/abstract.SwapComponent) in the Contracts reference.
 
 ## How a swap runs
 

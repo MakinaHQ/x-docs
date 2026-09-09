@@ -2,7 +2,7 @@
 
 Position management is how a strategy actually deploys capital: opening, resizing, and closing positions in external protocols, and measuring what those positions are worth. It is the most security-critical part of MakinaX, because it runs operator-supplied scripts **inside the Safe** and is the path through which most value moves.
 
-This page explains the mental model. For the exact validation rules, see [`WeirollComponent`](/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent) and its interface [`IWeirollComponent`](/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent) in the Contracts reference.
+This page explains the mental model. For the exact validation rules, see [`WeirollComponent`](/contracts/module-components/abstract.WeirollComponent) and its interface [`IWeirollComponent`](/contracts/interfaces/interface.IWeirollComponent) in the Contracts reference.
 
 ## Weiroll scripts run inside the Safe
 
@@ -73,7 +73,7 @@ Two limits express the tolerance, one for each direction of the position value c
 
 In both cases the position value change must stay within the configured tolerance of the affected-token flow it is paired with. That pairing is what inverts between asset and debt positions (as above), so the same two limits govern both.
 
-Combinations that should be impossible (value dropped while spending into an asset position, debt grew while spending) are rejected outright as an invalid direction. Combinations where value appears to rise implausibly are capped, an anti-fabrication guard. The exact rules form a matrix over three booleans (token flow direction, debt flag, position-value direction). The authoritative version of that matrix lives in the [`IWeirollComponent`](/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent) `managePosition` documentation and in [`WeirollComponent`](/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent).
+Combinations that should be impossible (value dropped while spending into an asset position, debt grew while spending) are rejected outright as an invalid direction. Combinations where value appears to rise implausibly are capped, an anti-fabrication guard. The exact rules form a matrix over three booleans (token flow direction, debt flag, position-value direction). The authoritative version of that matrix lives in the [`IWeirollComponent`](/contracts/interfaces/interface.IWeirollComponent) `managePosition` documentation and in [`WeirollComponent`](/contracts/module-components/abstract.WeirollComponent).
 
 Each side of this comparison is floored to the accounting currency's smallest unit, so up to one unit per affected or position token can be hidden inside an otherwise valid check. The rounding favors the operator, which is what makes the choice of accounting currency a risk decision, covered in the [Risk Model](/concepts/risk-model#economic-risks).
 
@@ -89,7 +89,7 @@ In `WALLED` mode, each successful `MANAGEMENT` script records a timestamp keyed 
 
 Some position management needs temporary capital that is borrowed and repaid in the same transaction, for example to unwind a leveraged position. MakinaX supports this through a shared `FlashLoanModule` that wraps [Morpho](https://morpho.org/) flash loans and hands the borrowed funds to a module's position-management logic.
 
-Flash loan funds are only ever used by a `FLASHLOAN_MANAGEMENT` instruction, nested within an outer `MANAGEMENT` instruction. They are not a standalone Operator capability. For the exact mechanics, see [`FlashLoanModule`](/contracts/flash-loans/FlashLoanModule.sol/contract.FlashLoanModule) in the Contracts reference.
+Flash loan funds are only ever used by a `FLASHLOAN_MANAGEMENT` instruction, nested within an outer `MANAGEMENT` instruction. They are not a standalone Operator capability. For the exact mechanics, see [`FlashLoanModule`](/contracts/flash-loans/contract.FlashLoanModule) in the Contracts reference.
 
 ### The flow
 
