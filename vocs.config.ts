@@ -43,8 +43,8 @@ export default defineConfig({
       text: "Resources",
       items: [
         {
-          text: "Safe App",
-          link: "https://lite.makina.finance",
+          text: "App",
+          link: "https://x.makina.finance",
           external: true,
         },
         {
