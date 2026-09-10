@@ -1,6 +1,6 @@
 # Pricing & Oracles
 
-The swap loss limit and the `WALLED` position value-loss checks both rest on a single pricing layer: the [`OracleRegistry`](/contracts/module-components/OracleRegistry.sol/abstract.OracleRegistry). (The bridge loss limit is the exception. It compares amounts directly, without the oracle, as explained in [Token Bridging](/concepts/architecture/bridging).) If pricing is wrong, the loss checks that depend on it are silently weakened. This page explains how the oracle works and where its assumptions lie.
+The swap loss limit and the `WALLED` position value-loss checks both rest on a single pricing layer: the [`OracleRegistry`](/contracts/module-components/abstract.OracleRegistry). (The bridge loss limit is the exception. It compares amounts directly, without the oracle, as explained in [Token Bridging](/concepts/architecture/bridging).) If pricing is wrong, the loss checks that depend on it are silently weakened. This page explains how the oracle works and where its assumptions lie.
 
 ## Feed routes
 

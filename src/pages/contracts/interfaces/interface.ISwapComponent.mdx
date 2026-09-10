@@ -1,0 +1,284 @@
+---
+title: "ISwapComponent"
+---
+
+# ISwapComponent
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/ISwapComponent.sol)
+
+## Functions
+
+<a id="maxswaplossbps"></a>
+
+### maxSwapLossBps
+
+Max allowed value loss (in basis points) for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function maxSwapLossBps() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="swapcooldownduration"></a>
+
+### swapCooldownDuration
+
+Cooldown duration (in seconds) for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function swapCooldownDuration() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="swapfeerate"></a>
+
+### swapFeeRate
+
+Swap fee rate, 1e18 = 100%.
+
+```solidity
+function swapFeeRate() external view returns (uint256);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="getswappertargets-uint16"></a>
+
+### getSwapperTargets
+
+Returns approval and execution targets for a given swapper ID.
+
+```solidity
+function getSwapperTargets(uint16 swapperId) external view returns (address approvalTarget, address executionTarget);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` | The swapper ID. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| approvalTarget | `address` | The approval target. |
+| executionTarget | `address` | The execution target. |
+
+<a id="swap-swaporder"></a>
+
+### swap
+
+Swaps tokens on behalf of the Safe using a given swapper.
+
+```solidity
+function swap(SwapOrder calldata order) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `SwapOrder` | The swap params. |
+
+<a id="setmaxswaplossbps-uint256"></a>
+
+### setMaxSwapLossBps
+
+Sets the maximum allowed relative value loss for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function setMaxSwapLossBps(uint256 newMaxSwapLossBps) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxSwapLossBps | `uint256` | The new maximum value loss in basis points. |
+
+<a id="setswapcooldownduration-uint256"></a>
+
+### setSwapCooldownDuration
+
+Sets the cooldown duration for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function setSwapCooldownDuration(uint256 newSwapCooldownDuration) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapCooldownDuration | `uint256` | The new cooldown duration in seconds. |
+
+<a id="setswapfeerate-uint256"></a>
+
+### setSwapFeeRate
+
+Sets the swap fee rate.
+
+```solidity
+function setSwapFeeRate(uint256 newSwapFeeRate) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapFeeRate | `uint256` | The new swap fee rate, 1e18 = 100%. |
+
+<a id="setswappertargets-uint16-address-address"></a>
+
+### setSwapperTargets
+
+Sets approval and execution targets for a given swapper ID.
+
+```solidity
+function setSwapperTargets(uint16 swapperId, address approvalTarget, address executionTarget) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` | The swapper ID. |
+| approvalTarget | `address` | The approval target. |
+| executionTarget | `address` | The execution target. |
+
+## Events
+
+### MaxSwapLossBpsChanged
+
+```solidity
+event MaxSwapLossBpsChanged(uint256 oldMaxSwapLossBps, uint256 newMaxSwapLossBps);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oldMaxSwapLossBps | `uint256` |  |
+| newMaxSwapLossBps | `uint256` |  |
+
+### Swap
+
+```solidity
+event Swap(
+        uint16 indexed swapperId,
+        address indexed inputToken,
+        address indexed outputToken,
+        uint256 inputAmount,
+        uint256 outputAmount
+    );
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` |  |
+| inputToken | `address` |  |
+| outputToken | `address` |  |
+| inputAmount | `uint256` |  |
+| outputAmount | `uint256` |  |
+
+### SwapCooldownDurationChanged
+
+```solidity
+event SwapCooldownDurationChanged(uint256 oldSwapCooldownDuration, uint256 newSwapCooldownDuration);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oldSwapCooldownDuration | `uint256` |  |
+| newSwapCooldownDuration | `uint256` |  |
+
+### SwapFeeRateChanged
+
+```solidity
+event SwapFeeRateChanged(uint256 oldSwapFeeRate, uint256 newSwapFeeRate);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oldSwapFeeRate | `uint256` |  |
+| newSwapFeeRate | `uint256` |  |
+
+### SwapperTargetsSet
+
+```solidity
+event SwapperTargetsSet(uint16 indexed swapperId, address approvalTarget, address executionTarget);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` |  |
+| approvalTarget | `address` |  |
+| executionTarget | `address` |  |
+
+## Structs
+
+### SwapperTargets
+
+```solidity
+struct SwapperTargets {
+        address approvalTarget;
+        address executionTarget;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| approvalTarget | `address` |  |
+| executionTarget | `address` |  |
+
+### SwapOrder
+
+Generic swap params.
+
+```solidity
+struct SwapOrder {
+        uint16 swapperId;
+        bytes data;
+        address inputToken;
+        address outputToken;
+        uint256 inputAmount;
+        uint256 minOutputAmount;
+    }
+```
+
+**Properties**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` | The ID of the external swap protocol. |
+| data | `bytes` | The swap calldata to pass to the swapper's execution target. |
+| inputToken | `address` | The input token. |
+| outputToken | `address` | The output token. |
+| inputAmount | `uint256` | The input amount. |
+| minOutputAmount | `uint256` | The minimum expected output amount. |
+

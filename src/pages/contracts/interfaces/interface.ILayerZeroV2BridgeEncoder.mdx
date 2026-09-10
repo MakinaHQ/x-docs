@@ -1,0 +1,144 @@
+---
+title: "ILayerZeroV2BridgeEncoder"
+---
+
+# ILayerZeroV2BridgeEncoder
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/ILayerZeroV2BridgeEncoder.sol)
+
+**Inherits:** [IBridgeEncoder](/contracts/interfaces/interface.IBridgeEncoder)
+
+## Functions
+
+<a id="getlzendpointid-uint256"></a>
+
+### getLzEndpointId
+
+EVM chain ID => LayerZero endpoint ID
+
+```solidity
+function getLzEndpointId(uint256 evmChainId) external view returns (uint32);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint32` |  |
+
+<a id="isoftregistered-address"></a>
+
+### isOftRegistered
+
+OFT => Whether the OFT is registered
+
+```solidity
+function isOftRegistered(address oft) external view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oft | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="setlzendpointid-uint256-uint32"></a>
+
+### setLzEndpointId
+
+Associates an EVM chain ID with a LayerZero endpoint ID in the contract storage.
+
+```solidity
+function setLzEndpointId(uint256 evmChainId, uint32 lzEndpointId) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` | The EVM chain ID. |
+| lzEndpointId | `uint32` | The LayerZero endpoint ID. |
+
+<a id="addoft-address"></a>
+
+### addOft
+
+Registers an OFT contract.
+
+```solidity
+function addOft(address oft) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oft | `address` | The address of the OFT. |
+
+<a id="removeoft-address"></a>
+
+### removeOft
+
+Unregisters an OFT contract.
+
+```solidity
+function removeOft(address oft) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oft | `address` | The address of the OFT. |
+
+## Events
+
+### LzEndpointIdRegistered
+
+```solidity
+event LzEndpointIdRegistered(uint256 indexed evmChainId, uint32 indexed lzEndpointId);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` |  |
+| lzEndpointId | `uint32` |  |
+
+### OftAdded
+
+```solidity
+event OftAdded(address indexed oft);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oft | `address` |  |
+
+### OftRemoved
+
+```solidity
+event OftRemoved(address indexed oft);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| oft | `address` |  |
+

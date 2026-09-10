@@ -22,34 +22,16 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "AcrossV4BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "AcrossV4BridgeEncoder",
-            "link": "/contracts/bridge-encoders/AcrossV4BridgeEncoder.sol/contract.AcrossV4BridgeEncoder"
-          }
-        ]
+        "text": "AcrossV4BridgeEncoder",
+        "link": "/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder"
       },
       {
-        "text": "CctpV2BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "CctpV2BridgeEncoder",
-            "link": "/contracts/bridge-encoders/CctpV2BridgeEncoder.sol/contract.CctpV2BridgeEncoder"
-          }
-        ]
+        "text": "CctpV2BridgeEncoder",
+        "link": "/contracts/bridge-encoders/contract.CctpV2BridgeEncoder"
       },
       {
-        "text": "LayerZeroV2BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "LayerZeroV2BridgeEncoder",
-            "link": "/contracts/bridge-encoders/LayerZeroV2BridgeEncoder.sol/contract.LayerZeroV2BridgeEncoder"
-          }
-        ]
+        "text": "LayerZeroV2BridgeEncoder",
+        "link": "/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder"
       }
     ]
   },
@@ -58,14 +40,8 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "ModuleFactory.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ModuleFactory",
-            "link": "/contracts/factory/ModuleFactory.sol/contract.ModuleFactory"
-          }
-        ]
+        "text": "ModuleFactory",
+        "link": "/contracts/factory/contract.ModuleFactory"
       }
     ]
   },
@@ -74,14 +50,8 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "FlashLoanModule.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "FlashLoanModule",
-            "link": "/contracts/flash-loans/FlashLoanModule.sol/contract.FlashLoanModule"
-          }
-        ]
+        "text": "FlashLoanModule",
+        "link": "/contracts/flash-loans/contract.FlashLoanModule"
       }
     ]
   },
@@ -90,224 +60,92 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "AggregatorV2V3Interface.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "AggregatorV2V3Interface",
-            "link": "/contracts/interfaces/AggregatorV2V3Interface.sol/interface.AggregatorV2V3Interface"
-          }
-        ]
+        "text": "AggregatorV2V3Interface",
+        "link": "/contracts/interfaces/interface.AggregatorV2V3Interface"
       },
       {
-        "text": "IAcrossV4BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IAcrossV4BridgeEncoder",
-            "link": "/contracts/interfaces/IAcrossV4BridgeEncoder.sol/interface.IAcrossV4BridgeEncoder"
-          }
-        ]
+        "text": "IAcrossV4BridgeEncoder",
+        "link": "/contracts/interfaces/interface.IAcrossV4BridgeEncoder"
       },
       {
-        "text": "IAcrossV4SpokePool.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IAcrossV4SpokePool",
-            "link": "/contracts/interfaces/IAcrossV4SpokePool.sol/interface.IAcrossV4SpokePool"
-          }
-        ]
+        "text": "IAcrossV4SpokePool",
+        "link": "/contracts/interfaces/interface.IAcrossV4SpokePool"
       },
       {
-        "text": "IBridgeComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IBridgeComponent",
-            "link": "/contracts/interfaces/IBridgeComponent.sol/interface.IBridgeComponent"
-          }
-        ]
+        "text": "IBridgeComponent",
+        "link": "/contracts/interfaces/interface.IBridgeComponent"
       },
       {
-        "text": "IBridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IBridgeEncoder",
-            "link": "/contracts/interfaces/IBridgeEncoder.sol/interface.IBridgeEncoder"
-          }
-        ]
+        "text": "IBridgeEncoder",
+        "link": "/contracts/interfaces/interface.IBridgeEncoder"
       },
       {
-        "text": "ICctpV2BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ICctpV2BridgeEncoder",
-            "link": "/contracts/interfaces/ICctpV2BridgeEncoder.sol/interface.ICctpV2BridgeEncoder"
-          }
-        ]
+        "text": "ICctpV2BridgeEncoder",
+        "link": "/contracts/interfaces/interface.ICctpV2BridgeEncoder"
       },
       {
-        "text": "ICctpV2TokenMessenger.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ICctpV2TokenMessenger",
-            "link": "/contracts/interfaces/ICctpV2TokenMessenger.sol/interface.ICctpV2TokenMessenger"
-          }
-        ]
+        "text": "ICctpV2TokenMessenger",
+        "link": "/contracts/interfaces/interface.ICctpV2TokenMessenger"
       },
       {
-        "text": "IFlashLoanModule.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IFlashLoanModule",
-            "link": "/contracts/interfaces/IFlashLoanModule.sol/interface.IFlashLoanModule"
-          }
-        ]
+        "text": "IFlashLoanModule",
+        "link": "/contracts/interfaces/interface.IFlashLoanModule"
       },
       {
-        "text": "ILayerZeroV2BridgeEncoder.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ILayerZeroV2BridgeEncoder",
-            "link": "/contracts/interfaces/ILayerZeroV2BridgeEncoder.sol/interface.ILayerZeroV2BridgeEncoder"
-          }
-        ]
+        "text": "ILayerZeroV2BridgeEncoder",
+        "link": "/contracts/interfaces/interface.ILayerZeroV2BridgeEncoder"
       },
       {
-        "text": "IMakinaXContext.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMakinaXContext",
-            "link": "/contracts/interfaces/IMakinaXContext.sol/interface.IMakinaXContext"
-          }
-        ]
+        "text": "IMakinaXContext",
+        "link": "/contracts/interfaces/interface.IMakinaXContext"
       },
       {
-        "text": "IMakinaXGovernable.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMakinaXGovernable",
-            "link": "/contracts/interfaces/IMakinaXGovernable.sol/interface.IMakinaXGovernable"
-          }
-        ]
+        "text": "IMakinaXGovernable",
+        "link": "/contracts/interfaces/interface.IMakinaXGovernable"
       },
       {
-        "text": "IMakinaXModule.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMakinaXModule",
-            "link": "/contracts/interfaces/IMakinaXModule.sol/interface.IMakinaXModule"
-          }
-        ]
+        "text": "IMakinaXModule",
+        "link": "/contracts/interfaces/interface.IMakinaXModule"
       },
       {
-        "text": "IMakinaXRegistry.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMakinaXRegistry",
-            "link": "/contracts/interfaces/IMakinaXRegistry.sol/interface.IMakinaXRegistry"
-          }
-        ]
+        "text": "IMakinaXRegistry",
+        "link": "/contracts/interfaces/interface.IMakinaXRegistry"
       },
       {
-        "text": "IModuleFactory.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IModuleFactory",
-            "link": "/contracts/interfaces/IModuleFactory.sol/interface.IModuleFactory"
-          }
-        ]
+        "text": "IModuleFactory",
+        "link": "/contracts/interfaces/interface.IModuleFactory"
       },
       {
-        "text": "IMorpho.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMorpho",
-            "link": "/contracts/interfaces/IMorpho.sol/interface.IMorpho"
-          }
-        ]
+        "text": "IMorpho",
+        "link": "/contracts/interfaces/interface.IMorpho"
       },
       {
-        "text": "IMorphoFlashLoanCallback.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IMorphoFlashLoanCallback",
-            "link": "/contracts/interfaces/IMorphoFlashLoanCallback.sol/interface.IMorphoFlashLoanCallback"
-          }
-        ]
+        "text": "IMorphoFlashLoanCallback",
+        "link": "/contracts/interfaces/interface.IMorphoFlashLoanCallback"
       },
       {
-        "text": "IOFT.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IOFT",
-            "link": "/contracts/interfaces/IOFT.sol/interface.IOFT"
-          }
-        ]
+        "text": "IOFT",
+        "link": "/contracts/interfaces/interface.IOFT"
       },
       {
-        "text": "IOracleRegistry.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IOracleRegistry",
-            "link": "/contracts/interfaces/IOracleRegistry.sol/interface.IOracleRegistry"
-          }
-        ]
+        "text": "IOracleRegistry",
+        "link": "/contracts/interfaces/interface.IOracleRegistry"
       },
       {
-        "text": "ISafe.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ISafe",
-            "link": "/contracts/interfaces/ISafe.sol/interface.ISafe"
-          }
-        ]
+        "text": "ISafe",
+        "link": "/contracts/interfaces/interface.ISafe"
       },
       {
-        "text": "ISwapComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "ISwapComponent",
-            "link": "/contracts/interfaces/ISwapComponent.sol/interface.ISwapComponent"
-          }
-        ]
+        "text": "ISwapComponent",
+        "link": "/contracts/interfaces/interface.ISwapComponent"
       },
       {
-        "text": "IWeirollComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IWeirollComponent",
-            "link": "/contracts/interfaces/IWeirollComponent.sol/interface.IWeirollComponent"
-          }
-        ]
+        "text": "IWeirollComponent",
+        "link": "/contracts/interfaces/interface.IWeirollComponent"
       },
       {
-        "text": "IWeirollVM.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "IWeirollVM",
-            "link": "/contracts/interfaces/IWeirollVM.sol/interface.IWeirollVM"
-          }
-        ]
+        "text": "IWeirollVM",
+        "link": "/contracts/interfaces/interface.IWeirollVM"
       }
     ]
   },
@@ -316,80 +154,38 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "DecimalsUtils.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "DecimalsUtils",
-            "link": "/contracts/libraries/DecimalsUtils.sol/library.DecimalsUtils"
-          }
-        ]
+        "text": "DecimalsUtils",
+        "link": "/contracts/libraries/library.DecimalsUtils"
       },
       {
-        "text": "Errors.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "Errors",
-            "link": "/contracts/libraries/Errors.sol/library.Errors"
-          }
-        ]
+        "text": "Errors",
+        "link": "/contracts/libraries/library.Errors"
       }
     ]
   },
   {
-    "text": "MakinaXModule.sol",
-    "collapsed": true,
-    "items": [
-      {
-        "text": "MakinaXModule",
-        "link": "/contracts/MakinaXModule.sol/contract.MakinaXModule"
-      }
-    ]
+    "text": "MakinaXModule",
+    "link": "/contracts/contract.MakinaXModule"
   },
   {
     "text": "Module Components",
     "collapsed": true,
     "items": [
       {
-        "text": "BridgeComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "BridgeComponent",
-            "link": "/contracts/module-components/BridgeComponent.sol/abstract.BridgeComponent"
-          }
-        ]
+        "text": "BridgeComponent",
+        "link": "/contracts/module-components/abstract.BridgeComponent"
       },
       {
-        "text": "OracleRegistry.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "OracleRegistry",
-            "link": "/contracts/module-components/OracleRegistry.sol/abstract.OracleRegistry"
-          }
-        ]
+        "text": "OracleRegistry",
+        "link": "/contracts/module-components/abstract.OracleRegistry"
       },
       {
-        "text": "SwapComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "SwapComponent",
-            "link": "/contracts/module-components/SwapComponent.sol/abstract.SwapComponent"
-          }
-        ]
+        "text": "SwapComponent",
+        "link": "/contracts/module-components/abstract.SwapComponent"
       },
       {
-        "text": "WeirollComponent.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "WeirollComponent",
-            "link": "/contracts/module-components/WeirollComponent.sol/abstract.WeirollComponent"
-          }
-        ]
+        "text": "WeirollComponent",
+        "link": "/contracts/module-components/abstract.WeirollComponent"
       }
     ]
   },
@@ -398,14 +194,8 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "MakinaXRegistry.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "MakinaXRegistry",
-            "link": "/contracts/registry/MakinaXRegistry.sol/contract.MakinaXRegistry"
-          }
-        ]
+        "text": "MakinaXRegistry",
+        "link": "/contracts/registry/contract.MakinaXRegistry"
       }
     ]
   },
@@ -414,24 +204,12 @@ export const contractsSidebar = [
     "collapsed": true,
     "items": [
       {
-        "text": "MakinaXContext.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "MakinaXContext",
-            "link": "/contracts/utils/MakinaXContext.sol/abstract.MakinaXContext"
-          }
-        ]
+        "text": "MakinaXContext",
+        "link": "/contracts/utils/abstract.MakinaXContext"
       },
       {
-        "text": "MakinaXGovernable.sol",
-        "collapsed": true,
-        "items": [
-          {
-            "text": "MakinaXGovernable",
-            "link": "/contracts/utils/MakinaXGovernable.sol/abstract.MakinaXGovernable"
-          }
-        ]
+        "text": "MakinaXGovernable",
+        "link": "/contracts/utils/abstract.MakinaXGovernable"
       }
     ]
   }

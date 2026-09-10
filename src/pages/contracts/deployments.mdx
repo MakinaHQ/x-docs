@@ -7,34 +7,48 @@ import { Tabs, Tab } from "vocs";
 
 # Deployments
 
-Below are the addresses of the protocol-wide MakinaX contracts. Per-Safe modules are deployed by the [`ModuleFactory`](/contracts/factory/ModuleFactory.sol/contract.ModuleFactory) and are not listed here.
+Below are the addresses of the protocol-wide MakinaX contracts. Per-Safe modules are deployed by the [`ModuleFactory`](/contracts/factory/contract.ModuleFactory) and are not listed here.
+
+The infrastructure contracts are deployed deterministically and share the same addresses on every chain. The `AccessManager` governing them differs per chain: on Ethereum and Base it is the Makina Core `AccessManager`, while Optimism has a dedicated instance.
 
 {/* prettier-ignore-start */}
 
 <Tabs>
   <Tab title="Ethereum">
-    | Contract                  | Address                                        |
-    | ------------------------- | ---------------------------------------------- |
-    | AccessManager             | `0x0000000000000000000000000000000000000000` |
-    | MakinaXRegistry           | `0x0000000000000000000000000000000000000000` |
-    | ModuleFactory             | `0x0000000000000000000000000000000000000000` |
-    | MakinaXModule (impl)      | `0x0000000000000000000000000000000000000000` |
-    | FlashLoanModule           | `0x0000000000000000000000000000000000000000` |
-    | AcrossV4BridgeEncoder     | `0x0000000000000000000000000000000000000000` |
-    | CctpV2BridgeEncoder       | `0x0000000000000000000000000000000000000000` |
-    | LayerZeroV2BridgeEncoder  | `0x0000000000000000000000000000000000000000` |
+    | Contract                  | Address                                      |
+    | ------------------------- | -------------------------------------------- |
+    | AccessManager             | `0x0fCEfa3f1047F35521A49cD8B06faBd588665d7F` |
+    | MakinaXRegistry           | `0x2967EF24C780e22FD794c0f6dBA91f4643Fbb447` |
+    | ModuleFactory             | `0xDB2999734138c9a461d70Aa2FC5a20191a5CdeDA` |
+    | MakinaXModule (impl)      | `0xc49acdc023031Be4c422bE989Ff60e744E9F7Ad0` |
+    | FlashLoanModule           | `0x3ccF0D14533039Cf9111583Fc1cD3930466d6F0c` |
+    | AcrossV4BridgeEncoder     | `0x7Cb4b323881C21FBC14DA7B01C7119147f0C8A7F` |
+    | CctpV2BridgeEncoder       | `0x6822d23eC61D794a17F170A4E0b35d11D77448a0` |
+    | LayerZeroV2BridgeEncoder  | `0xB53C031Df02F59eD35F0664F95927d427B0622f3` |
   </Tab>
   <Tab title="Base">
-    | Contract                  | Address                                        |
-    | ------------------------- | ---------------------------------------------- |
-    | AccessManager             | `0x0000000000000000000000000000000000000000` |
-    | MakinaXRegistry           | `0x0000000000000000000000000000000000000000` |
-    | ModuleFactory             | `0x0000000000000000000000000000000000000000` |
-    | MakinaXModule (impl)      | `0x0000000000000000000000000000000000000000` |
-    | FlashLoanModule           | `0x0000000000000000000000000000000000000000` |
-    | AcrossV4BridgeEncoder     | `0x0000000000000000000000000000000000000000` |
-    | CctpV2BridgeEncoder       | `0x0000000000000000000000000000000000000000` |
-    | LayerZeroV2BridgeEncoder  | `0x0000000000000000000000000000000000000000` |
+    | Contract                  | Address                                      |
+    | ------------------------- | -------------------------------------------- |
+    | AccessManager             | `0x0fCEfa3f1047F35521A49cD8B06faBd588665d7F` |
+    | MakinaXRegistry           | `0x2967EF24C780e22FD794c0f6dBA91f4643Fbb447` |
+    | ModuleFactory             | `0xDB2999734138c9a461d70Aa2FC5a20191a5CdeDA` |
+    | MakinaXModule (impl)      | `0xc49acdc023031Be4c422bE989Ff60e744E9F7Ad0` |
+    | FlashLoanModule           | `0x3ccF0D14533039Cf9111583Fc1cD3930466d6F0c` |
+    | AcrossV4BridgeEncoder     | `0x7Cb4b323881C21FBC14DA7B01C7119147f0C8A7F` |
+    | CctpV2BridgeEncoder       | `0x6822d23eC61D794a17F170A4E0b35d11D77448a0` |
+    | LayerZeroV2BridgeEncoder  | `0xB53C031Df02F59eD35F0664F95927d427B0622f3` |
+  </Tab>
+  <Tab title="Optimism">
+    | Contract                  | Address                                      |
+    | ------------------------- | -------------------------------------------- |
+    | AccessManager             | `0xc47dA204836966d29Bec7e6f7a2063aa1A52Df33` |
+    | MakinaXRegistry           | `0x2967EF24C780e22FD794c0f6dBA91f4643Fbb447` |
+    | ModuleFactory             | `0xDB2999734138c9a461d70Aa2FC5a20191a5CdeDA` |
+    | MakinaXModule (impl)      | `0xc49acdc023031Be4c422bE989Ff60e744E9F7Ad0` |
+    | FlashLoanModule           | `0x3ccF0D14533039Cf9111583Fc1cD3930466d6F0c` |
+    | AcrossV4BridgeEncoder     | `0x7Cb4b323881C21FBC14DA7B01C7119147f0C8A7F` |
+    | CctpV2BridgeEncoder       | `0x6822d23eC61D794a17F170A4E0b35d11D77448a0` |
+    | LayerZeroV2BridgeEncoder  | `0xB53C031Df02F59eD35F0664F95927d427B0622f3` |
   </Tab>
 </Tabs>
 

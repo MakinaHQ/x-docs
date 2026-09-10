@@ -1,0 +1,162 @@
+---
+title: "CctpV2BridgeEncoder"
+---
+
+# CctpV2BridgeEncoder
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/bridge-encoders/CctpV2BridgeEncoder.sol)
+
+**Inherits:** AccessManagedUpgradeable, [ICctpV2BridgeEncoder](/contracts/interfaces/interface.ICctpV2BridgeEncoder)
+
+## Constants
+
+### MAINNET_CHAIN_ID
+
+```solidity
+uint256 private constant MAINNET_CHAIN_ID = 1;
+```
+
+### MAINNET_CCTP_DOMAIN
+
+```solidity
+uint32 private constant MAINNET_CCTP_DOMAIN = 0;
+```
+
+### FORWARD_HOOK_DATA
+
+```solidity
+bytes private constant FORWARD_HOOK_DATA = hex"636374702d666f72776172640000000000000000000000000000000000000000";
+```
+
+### cctpV2TokenMessenger
+
+Address of the CCTP TokenMessengerV2
+
+```solidity
+address public immutable cctpV2TokenMessenger;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+## State Variables
+
+### _evmToCctpId
+
+```solidity
+mapping(uint256 evmChainId => uint32 cctpDomain) private _evmToCctpId;
+```
+
+### _cctpToEvmId
+
+```solidity
+mapping(uint32 cctpDomain => uint256 evmChainId) private _cctpToEvmId;
+```
+
+## Functions
+
+<a id="constructor-address"></a>
+
+### constructor
+
+```solidity
+constructor(address _cctpV2TokenMessenger);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _cctpV2TokenMessenger | `address` |  |
+
+<a id="initialize-address"></a>
+
+### initialize
+
+```solidity
+function initialize(address initialAuthority) external initializer;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| initialAuthority | `address` |  |
+
+<a id="getcctpdomain-uint256"></a>
+
+### getCctpDomain
+
+EVM chain ID => CCTP domain
+
+```solidity
+function getCctpDomain(uint256 evmChainId) public view override returns (uint32);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint32` |  |
+
+<a id="getbridgetransferdata-ibridgecomponent-bridgeorder"></a>
+
+### getBridgeTransferData
+
+Returns targets, value, and calldata to execute a bridge transfer.
+
+<i>
+
+Intended to be called only by a MakinaXModule instance, from which implementations may read caller state via `msg.sender`.
+
+</i>
+
+```solidity
+function getBridgeTransferData(IBridgeComponent.BridgeOrder calldata order)
+        external
+        view
+        override
+        returns (address, address, uint256, bytes memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `IBridgeComponent.BridgeOrder` | The bridge transfer params. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` | The address of the approval target. |
+| &lt;none&gt; | `address` | The address of the execution target. |
+| &lt;none&gt; | `uint256` | The value to pass along with the calldata. |
+| &lt;none&gt; | `bytes` | The calldata to execute. |
+
+<a id="setcctpdomain-uint256-uint32"></a>
+
+### setCctpDomain
+
+Associates an EVM chain ID with a CCTP domain in the contract storage.
+
+```solidity
+function setCctpDomain(uint256 evmChainId, uint32 cctpDomain) external override restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| evmChainId | `uint256` | The EVM chain ID. |
+| cctpDomain | `uint32` | The CCTP domain. |
+

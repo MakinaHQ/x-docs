@@ -1,0 +1,273 @@
+---
+title: "OracleRegistry"
+---
+
+# OracleRegistry
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/module-components/OracleRegistry.sol)
+
+**Inherits:** [IOracleRegistry](/contracts/interfaces/interface.IOracleRegistry)
+
+## State Variables
+
+### _feedRoutes
+
+```solidity
+mapping(address token => FeedRoute feedRoute) private _feedRoutes;
+```
+
+### _feedStaleThreshold
+
+```solidity
+mapping(address feed => uint256 stalenessThreshold) private _feedStaleThreshold;
+```
+
+## Functions
+
+<a id="getfeedstalethreshold-address"></a>
+
+### getFeedStaleThreshold
+
+Feed => Staleness threshold in seconds
+
+```solidity
+function getFeedStaleThreshold(address feed) external view override returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feed | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="isfeedrouteregistered-address"></a>
+
+### isFeedRouteRegistered
+
+Token => Is feed route registered for the token
+
+```solidity
+function isFeedRouteRegistered(address token) public view override returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="getfeedroute-address"></a>
+
+### getFeedRoute
+
+Gets the price feed route for a given token.
+
+```solidity
+function getFeedRoute(address token) external view override returns (address, address);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the token for which the price feed route is requested. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` | feed1 The address of the first price feed. |
+| &lt;none&gt; | `address` | feed2 The address of the optional second price feed. |
+
+<a id="getreferenceprice-address"></a>
+
+### getReferencePrice
+
+Returns the price of one unit of the given token in terms of the reference currency.
+
+```solidity
+function getReferencePrice(address baseToken) public view override returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseToken | `address` | The address of the token for which the price is requested. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` | price The price of baseToken denominated in the reference currency (expressed in 18 decimals). |
+
+<a id="getprice-address-address"></a>
+
+### getPrice
+
+Returns the price of one unit of baseToken in terms of quoteToken.
+
+```solidity
+function getPrice(address baseToken, address quoteToken) public view override returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseToken | `address` | The address of the token for which the price is requested. |
+| quoteToken | `address` | The address of the token in which the price is quoted. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` | price The price of baseToken denominated in quoteToken (expressed in quoteToken decimals). |
+
+<a id="_getfeedprice-address"></a>
+
+### _getFeedPrice
+
+<i>
+
+Returns the last price of the feed.
+
+</i>
+
+<i>
+
+Reverts if the feed is stale or the price is negative.
+
+</i>
+
+```solidity
+function _getFeedPrice(address feed) private view returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feed | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_getfeeddecimals-address"></a>
+
+### _getFeedDecimals
+
+<i>
+
+Returns the number of decimals of the feed.
+
+</i>
+
+<i>
+
+Returns 0 if the feed is not set.
+
+</i>
+
+```solidity
+function _getFeedDecimals(address feed) private view returns (uint8);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feed | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint8` |  |
+
+<a id="_setfeedroute-address-address-uint256-address-uint256"></a>
+
+### _setFeedRoute
+
+<i>
+
+Internal logic to set feed route for a token.
+
+</i>
+
+```solidity
+function _setFeedRoute(
+        address token,
+        address feed1,
+        uint256 stalenessThreshold1,
+        address feed2,
+        uint256 stalenessThreshold2
+    ) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+| feed1 | `address` |  |
+| stalenessThreshold1 | `uint256` |  |
+| feed2 | `address` |  |
+| stalenessThreshold2 | `uint256` |  |
+
+<a id="_clearfeedroute-address"></a>
+
+### _clearFeedRoute
+
+<i>
+
+Internal logic to clear feed route for a token.
+
+</i>
+
+```solidity
+function _clearFeedRoute(address token) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+
+<a id="_setfeedstalethreshold-address-uint256"></a>
+
+### _setFeedStaleThreshold
+
+<i>
+
+Internal logic to set the price staleness threshold for a given feed.
+
+</i>
+
+```solidity
+function _setFeedStaleThreshold(address feed, uint256 newThreshold) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feed | `address` |  |
+| newThreshold | `uint256` |  |
+

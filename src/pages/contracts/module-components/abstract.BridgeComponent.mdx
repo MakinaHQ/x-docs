@@ -1,0 +1,225 @@
+---
+title: "BridgeComponent"
+---
+
+# BridgeComponent
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/module-components/BridgeComponent.sol)
+
+**Inherits:** [IBridgeComponent](/contracts/interfaces/interface.IBridgeComponent)
+
+## Constants
+
+### MAX_BPS
+
+<i>
+
+Full scale value in basis points
+
+</i>
+
+```solidity
+uint256 private constant MAX_BPS = 10_000;
+```
+
+## State Variables
+
+### _maxBridgeLossBps
+
+```solidity
+mapping(uint16 bridgeId => uint256 maxBridgeLossBps) private _maxBridgeLossBps;
+```
+
+### _isWhitelistedRecipient
+
+```solidity
+mapping(uint256 foreignChainId => mapping(address recipient => bool isWhitelisted)) private _isWhitelistedRecipient;
+```
+
+### _lastGuardedBridgeOutTimestamps
+
+```solidity
+mapping(uint16 bridgeId => uint256 timestamp) private _lastGuardedBridgeOutTimestamps;
+```
+
+### bridgeCooldownDuration
+
+Cooldown duration (in seconds) for bridge transfers while in FENCED or WALLED mode.
+
+```solidity
+uint256 public bridgeCooldownDuration;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+## Functions
+
+<a id="getmaxbridgelossbps-uint16"></a>
+
+### getMaxBridgeLossBps
+
+Bridge ID => Max allowed value loss in basis points for transfers via this bridge while in FENCED or WALLED mode.
+
+```solidity
+function getMaxBridgeLossBps(uint16 bridgeId) external view returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="iswhitelistedrecipient-uint256-address"></a>
+
+### isWhitelistedRecipient
+
+Foreign Chain ID => Recipient => Whitelisting status while in FENCED or WALLED mode.
+
+```solidity
+function isWhitelistedRecipient(uint256 foreignChainId, address recipient) external view returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreignChainId | `uint256` |  |
+| recipient | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+<a id="_sendoutbridgetransfer-ibridgecomponent-bridgeorder-address-bool"></a>
+
+### _sendOutBridgeTransfer
+
+```solidity
+function _sendOutBridgeTransfer(IBridgeComponent.BridgeOrder calldata order, address encoder, bool guarded)
+        internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `IBridgeComponent.BridgeOrder` |  |
+| encoder | `address` |  |
+| guarded | `bool` |  |
+
+<a id="_setmaxbridgelossbps-uint16-uint256"></a>
+
+### _setMaxBridgeLossBps
+
+<i>
+
+Internal logic to set the maximum allowed relative value loss for transfers via a given bridge.
+
+</i>
+
+```solidity
+function _setMaxBridgeLossBps(uint16 bridgeId, uint256 newMaxBridgeLossBps) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` |  |
+| newMaxBridgeLossBps | `uint256` |  |
+
+<a id="_setbridgecooldownduration-uint256"></a>
+
+### _setBridgeCooldownDuration
+
+<i>
+
+Internal logic to set the cooldown duration for bridge transfers.
+
+</i>
+
+```solidity
+function _setBridgeCooldownDuration(uint256 newBridgeCooldownDuration) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newBridgeCooldownDuration | `uint256` |  |
+
+<a id="_addrecipient-uint256-address"></a>
+
+### _addRecipient
+
+<i>
+
+Internal logic to add a whitelisted recipient for bridge transfer to a given foreign chain.
+
+</i>
+
+```solidity
+function _addRecipient(uint256 foreignChainId, address recipient) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreignChainId | `uint256` |  |
+| recipient | `address` |  |
+
+<a id="_removerecipient-uint256-address"></a>
+
+### _removeRecipient
+
+<i>
+
+Internal logic to remove a whitelisted recipient for bridge transfer to a given foreign chain.
+
+</i>
+
+```solidity
+function _removeRecipient(uint256 foreignChainId, address recipient) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreignChainId | `uint256` |  |
+| recipient | `address` |  |
+
+<a id="_checkandsetcooldown-uint16"></a>
+
+### _checkAndSetCooldown
+
+<i>
+
+Checks cooldown for a given bridge and updates its last guarded outgoing transfer timestamp.
+
+</i>
+
+```solidity
+function _checkAndSetCooldown(uint16 bridgeId) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` |  |
+

@@ -1,0 +1,121 @@
+---
+title: "IAcrossV4BridgeEncoder"
+---
+
+# IAcrossV4BridgeEncoder
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/IAcrossV4BridgeEncoder.sol)
+
+**Inherits:** [IBridgeEncoder](/contracts/interfaces/interface.IBridgeEncoder)
+
+## Functions
+
+<a id="acrossv4spokepool"></a>
+
+### acrossV4SpokePool
+
+Address of the Across SpokePool.
+
+```solidity
+function acrossV4SpokePool() external view returns (address);
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="isrouteregistered-address-uint256-address"></a>
+
+### isRouteRegistered
+
+Returns whether a bridge transfer route is registered.
+
+```solidity
+function isRouteRegistered(address inputToken, uint256 foreignChainId, address outputToken)
+        external
+        view
+        returns (bool);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inputToken | `address` | The token to be sent from the source chain. |
+| foreignChainId | `uint256` | The destination chain ID. |
+| outputToken | `address` | The token to be received on the destination chain. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` | True if the route is registered, false otherwise. |
+
+<a id="addroute-address-uint256-address"></a>
+
+### addRoute
+
+Registers a transfer route.
+
+```solidity
+function addRoute(address inputToken, uint256 foreignChainId, address outputToken) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inputToken | `address` | The token to be sent from the source chain. |
+| foreignChainId | `uint256` | The destination chain ID. |
+| outputToken | `address` | The token to be received on the destination chain. |
+
+<a id="removeroute-address-uint256-address"></a>
+
+### removeRoute
+
+Unregisters a transfer route.
+
+```solidity
+function removeRoute(address inputToken, uint256 foreignChainId, address outputToken) external;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inputToken | `address` | The token to be sent from the source chain. |
+| foreignChainId | `uint256` | The destination chain ID. |
+| outputToken | `address` | The token to be received on the destination chain. |
+
+## Events
+
+### RouteAdded
+
+```solidity
+event RouteAdded(address indexed inputToken, uint256 indexed foreignChainId, address indexed outputToken);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inputToken | `address` |  |
+| foreignChainId | `uint256` |  |
+| outputToken | `address` |  |
+
+### RouteRemoved
+
+```solidity
+event RouteRemoved(address indexed inputToken, uint256 indexed foreignChainId, address indexed outputToken);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| inputToken | `address` |  |
+| foreignChainId | `uint256` |  |
+| outputToken | `address` |  |
+

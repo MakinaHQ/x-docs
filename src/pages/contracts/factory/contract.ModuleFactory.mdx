@@ -1,0 +1,356 @@
+---
+title: "ModuleFactory"
+---
+
+# ModuleFactory
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/factory/ModuleFactory.sol)
+
+**Inherits:** [MakinaXContext](/contracts/utils/abstract.MakinaXContext), AccessManagedUpgradeable, [IModuleFactory](/contracts/interfaces/interface.IModuleFactory)
+
+## Constants
+
+### MAX_FEE_RATE
+
+<i>
+
+Full scale value for fee rates.
+
+</i>
+
+```solidity
+uint256 private constant MAX_FEE_RATE = 1e18;
+```
+
+## State Variables
+
+### isMakinaXModule
+
+Module => Whether the module was deployed by this factory.
+
+```solidity
+mapping(address module => bool isModule) public isMakinaXModule;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| module | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isModule | `bool` |  |
+
+### defaultProvider
+
+Provider enforced by default on modules deployed through the free path.
+
+```solidity
+address public defaultProvider;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### defaultSwapFeeRate
+
+Swap fee rate enforced by default on modules deployed through the free path, 1e18 = 100%.
+
+```solidity
+uint256 public defaultSwapFeeRate;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+### freeDeployment
+
+Whether free module deployment is currently enabled.
+
+```solidity
+bool public freeDeployment;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bool` |  |
+
+## Functions
+
+<a id="constructor-address"></a>
+
+### constructor
+
+```solidity
+constructor(address _registry) MakinaXContext(_registry);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _registry | `address` |  |
+
+<a id="initialize-address-address-uint256-bool"></a>
+
+### initialize
+
+```solidity
+function initialize(
+        address initialAuthority,
+        address initialDefaultProvider,
+        uint256 initialDefaultSwapFeeRate,
+        bool initialFreeDeployment
+    ) external initializer;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| initialAuthority | `address` |  |
+| initialDefaultProvider | `address` |  |
+| initialDefaultSwapFeeRate | `uint256` |  |
+| initialFreeDeployment | `bool` |  |
+
+<a id="createmodule-imakinaxmodule-makinaxmoduleinitparams-imakinaxmodule-makinaxmoduleserviceparams-bytes32-bytes32"></a>
+
+### createModule
+
+Deploys a new MakinaXModule clone with caller-provided service parameters.
+
+<i>
+
+Restricted to authorized deployers.
+
+</i>
+
+```solidity
+function createModule(
+        IMakinaXModule.MakinaXModuleInitParams calldata params,
+        IMakinaXModule.MakinaXModuleServiceParams calldata serviceParams,
+        bytes32 salt,
+        bytes32 referralKey
+    ) external restricted returns (address);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| params | `IMakinaXModule.MakinaXModuleInitParams` | The strategy and risk initialization parameters for the MakinaXModule. |
+| serviceParams | `IMakinaXModule.MakinaXModuleServiceParams` | The protocol-controlled service initialization parameters. |
+| salt | `bytes32` | The salt used for deterministic deployment of the module clone. |
+| referralKey | `bytes32` | The referral key associated with the module creation. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` | The address of the newly deployed MakinaXModule. |
+
+<a id="createmodulefree-imakinaxmodule-makinaxmoduleinitparams-bytes32-bytes32"></a>
+
+### createModuleFree
+
+Deploys a new MakinaXModule clone, with service parameters enforced by the factory.
+
+<i>
+
+Callable by anyone while free deployment is enabled.
+
+</i>
+
+```solidity
+function createModuleFree(IMakinaXModule.MakinaXModuleInitParams calldata params, bytes32 salt, bytes32 referralKey)
+        external
+        returns (address);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| params | `IMakinaXModule.MakinaXModuleInitParams` | The strategy and risk initialization parameters for the MakinaXModule. |
+| salt | `bytes32` | The caller-scoped salt used for deterministic deployment of the module clone. |
+| referralKey | `bytes32` | The referral key associated with the module creation. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` | The address of the newly deployed MakinaXModule. |
+
+<a id="setdefaultprovider-address"></a>
+
+### setDefaultProvider
+
+Sets the provider enforced on free deployment.
+
+```solidity
+function setDefaultProvider(address newDefaultProvider) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newDefaultProvider | `address` | The new default provider address. |
+
+<a id="setdefaultswapfeerate-uint256"></a>
+
+### setDefaultSwapFeeRate
+
+Sets the swap fee rate enforced on free deployment.
+
+```solidity
+function setDefaultSwapFeeRate(uint256 newDefaultSwapFeeRate) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newDefaultSwapFeeRate | `uint256` | The new default swap fee rate, 1e18 = 100%. |
+
+<a id="setfreedeployment-bool"></a>
+
+### setFreeDeployment
+
+Enables or disables free module deployment.
+
+```solidity
+function setFreeDeployment(bool enabled) external restricted;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| enabled | `bool` | True to enable free deployment, false to disable it. |
+
+<a id="_createmodule-imakinaxmodule-makinaxmoduleinitparams-imakinaxmodule-makinaxmoduleserviceparams-bytes32-bytes32"></a>
+
+### _createModule
+
+<i>
+
+Internal logic to deploy and initialize a new MakinaXModule clone.
+
+</i>
+
+```solidity
+function _createModule(
+        IMakinaXModule.MakinaXModuleInitParams calldata params,
+        IMakinaXModule.MakinaXModuleServiceParams memory serviceParams,
+        bytes32 salt,
+        bytes32 referralKey
+    ) private returns (address);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| params | `IMakinaXModule.MakinaXModuleInitParams` |  |
+| serviceParams | `IMakinaXModule.MakinaXModuleServiceParams` |  |
+| salt | `bytes32` |  |
+| referralKey | `bytes32` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+<a id="_setdefaultprovider-address"></a>
+
+### _setDefaultProvider
+
+<i>
+
+Internal setter for the default provider.
+
+</i>
+
+```solidity
+function _setDefaultProvider(address newDefaultProvider) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newDefaultProvider | `address` |  |
+
+<a id="_setdefaultswapfeerate-uint256"></a>
+
+### _setDefaultSwapFeeRate
+
+<i>
+
+Internal setter for the default swap fee rate.
+
+</i>
+
+```solidity
+function _setDefaultSwapFeeRate(uint256 newDefaultSwapFeeRate) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newDefaultSwapFeeRate | `uint256` |  |
+
+<a id="_setfreedeployment-bool"></a>
+
+### _setFreeDeployment
+
+<i>
+
+Internal setter for free deployment.
+
+</i>
+
+```solidity
+function _setFreeDeployment(bool enabled) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| enabled | `bool` |  |
+
+<a id="_checkfeerate-uint256"></a>
+
+### _checkFeeRate
+
+<i>
+
+Performs sanity check on a fee rate.
+
+</i>
+
+```solidity
+function _checkFeeRate(uint256 rate) internal pure;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| rate | `uint256` |  |
+

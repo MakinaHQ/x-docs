@@ -1,0 +1,640 @@
+---
+title: "WeirollComponent"
+---
+
+# WeirollComponent
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/module-components/WeirollComponent.sol)
+
+**Inherits:** [IWeirollComponent](/contracts/interfaces/interface.IWeirollComponent)
+
+## Constants
+
+### MAX_BPS
+
+<i>
+
+Full scale value in basis points
+
+</i>
+
+```solidity
+uint256 private constant MAX_BPS = 10_000;
+```
+
+### ACCOUNTING_OUTPUT_STATE_END
+
+<i>
+
+Flag to indicate end of values in the accounting output state.
+
+</i>
+
+```solidity
+bytes32 private constant ACCOUNTING_OUTPUT_STATE_END = bytes32(type(uint256).max);
+```
+
+### MANAGED_POSITION_ID_SLOT
+
+```solidity
+bytes32 private constant MANAGED_POSITION_ID_SLOT =
+        0xfbb6b868544e1f69cf175881d715d83b048bd3f24bc7e327034891f3b849d600;
+```
+
+### IS_MANAGED_POSITION_DEBT_SLOT
+
+```solidity
+bytes32 private constant IS_MANAGED_POSITION_DEBT_SLOT =
+        0x4e4b4e291d20f6f03003921c4d26de1006021d95c6c1641168790b4e4b3b7200;
+```
+
+### IS_MANAGING_FLASHLOAN_SLOT
+
+```solidity
+bytes32 private constant IS_MANAGING_FLASHLOAN_SLOT =
+        0x8af85af09dfd26c2dc59ce2f32b0ca3422706a314bdc173e6610c5138eba2b00;
+```
+
+### weirollVm
+
+Address of the Weiroll VM.
+
+```solidity
+address public immutable weirollVm;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+## State Variables
+
+### _lastGuardedExecTimestamps
+
+```solidity
+mapping(bytes32 executionHash => uint256 timestamp) private _lastGuardedExecTimestamps;
+```
+
+### allowedInstrRoot
+
+Root of the Merkle tree containing allowed instructions.
+
+```solidity
+bytes32 public allowedInstrRoot;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bytes32` |  |
+
+### accountingCurrency
+
+Currency used to value positions.
+
+<i>
+
+If set to address(0), the reference currency of the OracleRegistry is used.
+
+</i>
+
+```solidity
+address public accountingCurrency;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `address` |  |
+
+### maxPositionIncreaseLossBps
+
+Max allowed value loss (in basis points) when increasing a position while in WALLED mode.
+
+```solidity
+uint256 public maxPositionIncreaseLossBps;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+### maxPositionDecreaseLossBps
+
+Max allowed value loss (in basis points) when decreasing a position while in WALLED mode.
+
+```solidity
+uint256 public maxPositionDecreaseLossBps;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+### instrCooldownDuration
+
+Cooldown duration for instruction executions in seconds.
+
+```solidity
+uint256 public instrCooldownDuration;
+```
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+## Functions
+
+<a id="constructor-address"></a>
+
+### constructor
+
+```solidity
+constructor(address _weirollVm);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _weirollVm | `address` |  |
+
+<a id="_manageposition-instruction-instruction-bool-address"></a>
+
+### _managePosition
+
+<i>
+
+Manages and accounts for a position by executing the provided instructions.
+
+</i>
+
+```solidity
+function _managePosition(
+        Instruction calldata mgmtInstruction,
+        Instruction calldata acctInstruction,
+        bool guarded,
+        address safe
+    ) internal returns (uint256 value, int256 change);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| mgmtInstruction | `Instruction` |  |
+| acctInstruction | `Instruction` |  |
+| guarded | `bool` |  |
+| safe | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| value | `uint256` |  |
+| change | `int256` |  |
+
+<a id="_manageflashloan-instruction-address-uint256-address-address"></a>
+
+### _manageFlashLoan
+
+<i>
+
+Manages and refunds flash loan funds.
+
+</i>
+
+```solidity
+function _manageFlashLoan(
+        Instruction calldata instruction,
+        address token,
+        uint256 amount,
+        address safe,
+        address flashLoanModule
+    ) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `Instruction` |  |
+| token | `address` |  |
+| amount | `uint256` |  |
+| safe | `address` |  |
+| flashLoanModule | `address` |  |
+
+<a id="_accountforposition-instruction-bool-address"></a>
+
+### _accountForPosition
+
+<i>
+
+Computes the accounting value of a position.
+
+</i>
+
+```solidity
+function _accountForPosition(Instruction calldata instruction, bool checks, address safe)
+        internal
+        returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `Instruction` |  |
+| checks | `bool` |  |
+| safe | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_harvest-iweirollcomponent-instruction-address"></a>
+
+### _harvest
+
+<i>
+
+Internal logic to harvest one or multiple positions.
+
+</i>
+
+```solidity
+function _harvest(IWeirollComponent.Instruction calldata instruction, address safe) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `IWeirollComponent.Instruction` |  |
+| safe | `address` |  |
+
+<a id="_decodeaccountingoutputstate-bytes"></a>
+
+### _decodeAccountingOutputState
+
+<i>
+
+Decodes the output state of an accounting instruction into an array of amounts.
+
+</i>
+
+```solidity
+function _decodeAccountingOutputState(bytes[] memory state) internal pure returns (uint256[] memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| state | `bytes[]` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256[]` |  |
+
+<a id="_checkpositionmindelta-uint256-uint256-uint256"></a>
+
+### _checkPositionMinDelta
+
+<i>
+
+Checks that absolute position value change is greater than minimum value relative to affected token balance changes and loss tolerance.
+
+</i>
+
+```solidity
+function _checkPositionMinDelta(uint256 positionValChange, uint256 affectedTokensValChange, uint256 maxLossBps)
+        internal
+        pure;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| positionValChange | `uint256` |  |
+| affectedTokensValChange | `uint256` |  |
+| maxLossBps | `uint256` |  |
+
+<a id="_checkpositionmaxdelta-uint256-uint256-uint256"></a>
+
+### _checkPositionMaxDelta
+
+<i>
+
+Checks that absolute position value change is less than maximum value relative to affected token balance changes and loss tolerance.
+
+</i>
+
+```solidity
+function _checkPositionMaxDelta(uint256 positionValChange, uint256 affectedTokensValChange, uint256 maxLossBps)
+        internal
+        pure;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| positionValChange | `uint256` |  |
+| affectedTokensValChange | `uint256` |  |
+| maxLossBps | `uint256` |  |
+
+<a id="_checkinstructionisallowed-instruction"></a>
+
+### _checkInstructionIsAllowed
+
+<i>
+
+Checks if the given instruction is allowed by verifying its Merkle proof against the allowed instructions root.
+
+</i>
+
+```solidity
+function _checkInstructionIsAllowed(Instruction calldata instruction) internal view;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `Instruction` | The instruction to check. |
+
+<a id="_getstatehash-bytes-uint128"></a>
+
+### _getStateHash
+
+<i>
+
+Computes a hash of the state array, selectively including elements as specified by a bitmap.
+This enables a Weiroll script to have both fixed and variable parameters.
+
+</i>
+
+```solidity
+function _getStateHash(bytes[] calldata state, uint128 bitmap) internal pure returns (bytes32);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| state | `bytes[]` | The state array to hash. |
+| bitmap | `uint128` | The bitmap where each bit determines whether the corresponding element in state is included or ignored in the hash computation. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bytes32` | hash The hash of the state array. |
+
+<a id="_aggregatetokensvalue-address-address"></a>
+
+### _aggregateTokensValue
+
+<i>
+
+Computes the total value of the token balances held by the Safe, priced in given currency.
+
+</i>
+
+```solidity
+function _aggregateTokensValue(address[] calldata tokens, address safe) internal view returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tokens | `address[]` |  |
+| safe | `address` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_setallowedinstrroot-bytes32"></a>
+
+### _setAllowedInstrRoot
+
+<i>
+
+Internal logic to set the root of the Merkle tree containing allowed instructions.
+
+</i>
+
+```solidity
+function _setAllowedInstrRoot(bytes32 newAllowedInstrRoot) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newAllowedInstrRoot | `bytes32` |  |
+
+<a id="_setaccountingcurrency-address"></a>
+
+### _setAccountingCurrency
+
+<i>
+
+Internal logic to set the accounting currency.
+
+</i>
+
+```solidity
+function _setAccountingCurrency(address newAccountingCurrency) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newAccountingCurrency | `address` |  |
+
+<a id="_setmaxpositionincreaselossbps-uint256"></a>
+
+### _setMaxPositionIncreaseLossBps
+
+<i>
+
+Internal logic to set the maximum allowed relative value loss for position increases.
+
+</i>
+
+```solidity
+function _setMaxPositionIncreaseLossBps(uint256 newMaxPositionIncreaseLossBps) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxPositionIncreaseLossBps | `uint256` |  |
+
+<a id="_setmaxpositiondecreaselossbps-uint256"></a>
+
+### _setMaxPositionDecreaseLossBps
+
+<i>
+
+Internal logic to set the maximum allowed relative value loss for position decreases.
+
+</i>
+
+```solidity
+function _setMaxPositionDecreaseLossBps(uint256 newMaxPositionDecreaseLossBps) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxPositionDecreaseLossBps | `uint256` |  |
+
+<a id="_setinstrcooldownduration-uint256"></a>
+
+### _setInstrCooldownDuration
+
+<i>
+
+Internal logic to set the cooldown duration for instruction executions.
+
+</i>
+
+```solidity
+function _setInstrCooldownDuration(uint256 newInstrCooldownDuration) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newInstrCooldownDuration | `uint256` |  |
+
+<a id="_execute-bytes32-bytes-address"></a>
+
+### _execute
+
+<i>
+
+Instructs the Safe to execute a set of commands via a delegatecall to the Weiroll VM.
+
+</i>
+
+```solidity
+function _execute(bytes32[] calldata commands, bytes[] memory state, address safe)
+        internal
+        returns (bytes[] memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| commands | `bytes32[]` | The commands to execute. |
+| state | `bytes[]` | The state to pass to the VM. |
+| safe | `address` | The Safe to dispatch the delegatecall. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `bytes[]` | outState The new state after executing the commands. |
+
+<a id="_checkandsetcooldown-bytes32"></a>
+
+### _checkAndSetCooldown
+
+<i>
+
+Checks cooldown for a given guarded execution and updates its last timestamp.
+
+</i>
+
+```solidity
+function _checkAndSetCooldown(bytes32 executionHash) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| executionHash | `bytes32` |  |
+
+<a id="_valueof-address-address-uint256"></a>
+
+### _valueOf
+
+<i>
+
+Returns the value of `baseTokenAmount` of `baseToken` denominated in `quoteToken`, using the registered price route.
+
+</i>
+
+```solidity
+function _valueOf(address baseToken, address quoteToken, uint256 baseTokenAmount)
+        internal
+        view
+        virtual
+        returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseToken | `address` |  |
+| quoteToken | `address` |  |
+| baseTokenAmount | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_refundflashloan-address-uint256-address"></a>
+
+### _refundFlashLoan
+
+<i>
+
+Transfers `amount` of ERC20 `token` from the Safe to the flash loan module via a module call.
+
+</i>
+
+```solidity
+function _refundFlashLoan(address token, uint256 amount, address flashLoanModule) internal virtual;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+| amount | `uint256` |  |
+| flashLoanModule | `address` |  |
+

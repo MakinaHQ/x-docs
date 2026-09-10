@@ -1,0 +1,835 @@
+---
+title: "MakinaXModule"
+---
+
+# MakinaXModule
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/MakinaXModule.sol)
+
+**Inherits:** [MakinaXContext](/contracts/utils/abstract.MakinaXContext), [MakinaXGovernable](/contracts/utils/abstract.MakinaXGovernable), [OracleRegistry](/contracts/module-components/abstract.OracleRegistry), [WeirollComponent](/contracts/module-components/abstract.WeirollComponent), [SwapComponent](/contracts/module-components/abstract.SwapComponent), [BridgeComponent](/contracts/module-components/abstract.BridgeComponent), ReentrancyGuard, [IMakinaXModule](/contracts/interfaces/interface.IMakinaXModule)
+
+## Constants
+
+### MAX_BPS
+
+<i>
+
+Full scale value in basis points
+
+</i>
+
+```solidity
+uint256 private constant MAX_BPS = 10_000;
+```
+
+### MAX_FEE_RATE
+
+<i>
+
+Full scale value for fee rates
+
+</i>
+
+```solidity
+uint256 private constant MAX_FEE_RATE = 1e18;
+```
+
+## Functions
+
+<a id="constructor-address-address"></a>
+
+### constructor
+
+```solidity
+constructor(address _registry, address _weirollVm) MakinaXContext(_registry) WeirollComponent(_weirollVm);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| _registry | `address` |  |
+| _weirollVm | `address` |  |
+
+<a id="initialize-makinaxmoduleinitparams-makinaxmoduleserviceparams"></a>
+
+### initialize
+
+Initializes the module with the given parameters.
+
+```solidity
+function initialize(MakinaXModuleInitParams calldata params, MakinaXModuleServiceParams calldata serviceParams)
+        external
+        override
+        initializer;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| params | `MakinaXModuleInitParams` | The strategy and risk initialization parameters. |
+| serviceParams | `MakinaXModuleServiceParams` | The protocol-controlled service initialization parameters. |
+
+<a id="receive"></a>
+
+### receive
+
+```solidity
+receive() external payable;
+```
+
+<a id="setfeedroute-address-address-uint256-address-uint256"></a>
+
+### setFeedRoute
+
+Sets the price feed route for a given token.
+
+<i>
+
+Both feeds, if set, must be Chainlink-interface-compliant.
+The combination of feed1 and feed2 must be able to price the token in the reference currency.
+If feed2 is set to address(0), the token price in the reference currency is assumed to be returned by feed1.
+
+</i>
+
+```solidity
+function setFeedRoute(
+        address token,
+        address feed1,
+        uint256 stalenessThreshold1,
+        address feed2,
+        uint256 stalenessThreshold2
+    ) external override nonReentrant onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the token for which the price feed route is set. |
+| feed1 | `address` | The address of the first price feed. |
+| stalenessThreshold1 | `uint256` | The staleness threshold for the first price feed. |
+| feed2 | `address` | The address of the second price feed. Can be set to address(0). |
+| stalenessThreshold2 | `uint256` | The staleness threshold for the second price feed. Ignored if feed2 is address(0). |
+
+<a id="clearfeedroute-address"></a>
+
+### clearFeedRoute
+
+Clears the price feed route for a given token.
+
+<i>
+
+Staleness thresholds for the route's feeds are preserved, as the feeds may be used by other routes.
+
+</i>
+
+```solidity
+function clearFeedRoute(address token) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the token for which the price feed route is cleared. |
+
+<a id="setfeedstalethreshold-address-uint256"></a>
+
+### setFeedStaleThreshold
+
+Sets the price staleness threshold for a given feed.
+
+```solidity
+function setFeedStaleThreshold(address feed, uint256 newThreshold) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| feed | `address` | The address of the price feed. |
+| newThreshold | `uint256` | The value of staleness threshold. |
+
+<a id="accountforposition-iweirollcomponent-instruction"></a>
+
+### accountForPosition
+
+Prices a position.
+
+```solidity
+function accountForPosition(IWeirollComponent.Instruction calldata instruction)
+        external
+        override
+        nonReentrant
+        whenOperational
+        onlyOperator
+        returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `IWeirollComponent.Instruction` | The accounting instruction. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` | The new position value. |
+
+<a id="accountforpositionbatch-iweirollcomponent-instruction-uint256"></a>
+
+### accountForPositionBatch
+
+Prices a batch of positions.
+
+```solidity
+function accountForPositionBatch(IWeirollComponent.Instruction[] calldata instructions, uint256[] calldata)
+        external
+        override
+        nonReentrant
+        whenOperational
+        onlyOperator
+        returns (uint256[] memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instructions | `IWeirollComponent.Instruction[]` | The array of accounting instructions. |
+| _ | `uint256[]` | Ignored parameter kept to preserve interface compatibility with Makina Core. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256[]` | The new position values. |
+
+<a id="manageposition-iweirollcomponent-instruction-iweirollcomponent-instruction"></a>
+
+### managePosition
+
+Manages a position's state through paired management and accounting instructions.
+
+The WALLED mode matrix evaluates three factors to determine required validations:
+
+- Affected Tokens flow - Sign of the change in the Safe's aggregate value of `mgmtInstruction.affectedTokens`
+
+- Debt Position - Whether position represents protocol liability (true) vs asset (false)
+
+- Position Δ direction - Direction of position value change (increase/decrease/null)
+
+┌──────────────────────┬───────────────┬──────────────────────┬───────────────────────────┐
+
+│ Affected Tokens flow │ Debt Position │ Position Δ direction │ Action                    │
+
+├──────────────────────┼───────────────┼──────────────────────┼───────────────────────────┤
+
+│ Outflow              │ No            │ Decrease             │ Revert: Invalid direction │
+
+│ Outflow              │ Yes           │ Increase             │ Revert: Invalid direction │
+
+│ Outflow              │ No            │ Increase / Null      │ Minimum Δ Check           │
+
+│ Outflow              │ Yes           │ Decrease / Null      │ Minimum Δ Check           │
+
+│ Inflow / Null        │ No            │ Decrease             │ Maximum Δ Check           │
+
+│ Inflow / Null        │ Yes           │ Increase             │ Maximum Δ Check           │
+
+│ Inflow / Null        │ No            │ Increase / Null      │ No check (favorable move) │
+
+│ Inflow / Null        │ Yes           │ Decrease / Null      │ No check (favorable move) │
+
+└──────────────────────┴───────────────┴──────────────────────┴───────────────────────────┘
+
+<i>
+
+If `acctInstruction` is provided, it is executed before and after the management instruction to
+compute the new position value and its signed delta.
+
+</i>
+
+<i>
+
+In WALLED mode, `acctInstruction` must be provided and value preservation checks are applied using
+a validation matrix to prevent economic inconsistencies between position changes and token flows.
+
+</i>
+
+```solidity
+function managePosition(
+        IWeirollComponent.Instruction calldata mgmtInstruction,
+        IWeirollComponent.Instruction calldata acctInstruction
+    ) external override nonReentrant whenOperational onlyOperator returns (uint256, int256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| mgmtInstruction | `IWeirollComponent.Instruction` | The management instruction. |
+| acctInstruction | `IWeirollComponent.Instruction` | The accounting instruction. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` | The new position value, or 0 if `acctInstruction` was not provided. |
+| &lt;none&gt; | `int256` | The signed position value delta, or 0 if `acctInstruction` was not provided. |
+
+<a id="managepositionbatch-iweirollcomponent-instruction-iweirollcomponent-instruction"></a>
+
+### managePositionBatch
+
+Manages a batch of positions.
+
+<i>
+
+Convenience function to manage multiple positions in a single transaction.
+
+</i>
+
+```solidity
+function managePositionBatch(
+        IWeirollComponent.Instruction[] calldata mgmtInstructions,
+        IWeirollComponent.Instruction[] calldata acctInstructions
+    ) external override nonReentrant whenOperational onlyOperator returns (uint256[] memory, int256[] memory);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| mgmtInstructions | `IWeirollComponent.Instruction[]` | The array of management instructions. |
+| acctInstructions | `IWeirollComponent.Instruction[]` | The array of accounting instructions. |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256[]` | The new position values. |
+| &lt;none&gt; | `int256[]` | The changes in the position values. |
+
+<a id="manageflashloan-iweirollcomponent-instruction-address-uint256"></a>
+
+### manageFlashLoan
+
+Manages flash loan funds.
+
+```solidity
+function manageFlashLoan(IWeirollComponent.Instruction calldata instruction, address token, uint256 amount)
+        external
+        override;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `IWeirollComponent.Instruction` | The flash loan management instruction. |
+| token | `address` | The loan token. |
+| amount | `uint256` | The loan amount. |
+
+<a id="harvest-iweirollcomponent-instruction-iswapcomponent-swaporder"></a>
+
+### harvest
+
+Harvests one or multiple positions.
+
+```solidity
+function harvest(IWeirollComponent.Instruction calldata instruction, ISwapComponent.SwapOrder[] calldata swapOrders)
+        external
+        override
+        nonReentrant
+        whenOperational
+        onlyOperator;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| instruction | `IWeirollComponent.Instruction` | The harvest instruction. |
+| swapOrders | `ISwapComponent.SwapOrder[]` | The array of swap orders to be executed after the harvest. |
+
+<a id="setallowedinstrroot-bytes32"></a>
+
+### setAllowedInstrRoot
+
+Sets the root of the Merkle tree containing allowed instructions.
+
+```solidity
+function setAllowedInstrRoot(bytes32 newAllowedInstrRoot) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newAllowedInstrRoot | `bytes32` | The new Merkle root. |
+
+<a id="setaccountingcurrency-address"></a>
+
+### setAccountingCurrency
+
+Sets the currency used to value positions.
+
+```solidity
+function setAccountingCurrency(address newAccountingCurrency) external override nonReentrant onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newAccountingCurrency | `address` | The new currency. |
+
+<a id="setmaxpositionincreaselossbps-uint256"></a>
+
+### setMaxPositionIncreaseLossBps
+
+Sets the maximum allowed relative value loss for position increases while in WALLED mode.
+
+```solidity
+function setMaxPositionIncreaseLossBps(uint256 newMaxPositionIncreaseLossBps) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxPositionIncreaseLossBps | `uint256` | The new maximum value loss in basis points. |
+
+<a id="setmaxpositiondecreaselossbps-uint256"></a>
+
+### setMaxPositionDecreaseLossBps
+
+Sets the maximum allowed relative value loss for position decreases while in WALLED mode.
+
+```solidity
+function setMaxPositionDecreaseLossBps(uint256 newMaxPositionDecreaseLossBps) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxPositionDecreaseLossBps | `uint256` | The new maximum value loss in basis points. |
+
+<a id="setinstrcooldownduration-uint256"></a>
+
+### setInstrCooldownDuration
+
+Sets the cooldown duration for instruction executions while in WALLED mode.
+
+```solidity
+function setInstrCooldownDuration(uint256 newInstrCooldownDuration) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newInstrCooldownDuration | `uint256` | The new cooldown duration in seconds. |
+
+<a id="swap-iswapcomponent-swaporder"></a>
+
+### swap
+
+Swaps tokens on behalf of the Safe using a given swapper.
+
+```solidity
+function swap(ISwapComponent.SwapOrder calldata order) external override nonReentrant whenOperational onlyOperator;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `ISwapComponent.SwapOrder` | The swap params. |
+
+<a id="setmaxswaplossbps-uint256"></a>
+
+### setMaxSwapLossBps
+
+Sets the maximum allowed relative value loss for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function setMaxSwapLossBps(uint256 newMaxSwapLossBps) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newMaxSwapLossBps | `uint256` | The new maximum value loss in basis points. |
+
+<a id="setswapcooldownduration-uint256"></a>
+
+### setSwapCooldownDuration
+
+Sets the cooldown duration for token swaps while in FENCED or WALLED mode.
+
+```solidity
+function setSwapCooldownDuration(uint256 newSwapCooldownDuration) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapCooldownDuration | `uint256` | The new cooldown duration in seconds. |
+
+<a id="setswapfeerate-uint256"></a>
+
+### setSwapFeeRate
+
+Sets the swap fee rate.
+
+```solidity
+function setSwapFeeRate(uint256 newSwapFeeRate) external override onlyProvider;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newSwapFeeRate | `uint256` | The new swap fee rate, 1e18 = 100%. |
+
+<a id="setswappertargets-uint16-address-address"></a>
+
+### setSwapperTargets
+
+Sets approval and execution targets for a given swapper ID.
+
+```solidity
+function setSwapperTargets(uint16 swapperId, address approvalTarget, address executionTarget)
+        external
+        override
+        onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| swapperId | `uint16` | The swapper ID. |
+| approvalTarget | `address` | The approval target. |
+| executionTarget | `address` | The execution target. |
+
+<a id="sendoutbridgetransfer-ibridgecomponent-bridgeorder"></a>
+
+### sendOutBridgeTransfer
+
+Executes an outgoing bridge transfer.
+
+```solidity
+function sendOutBridgeTransfer(IBridgeComponent.BridgeOrder calldata order)
+        external
+        override
+        nonReentrant
+        whenOperational
+        onlyOperator;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `IBridgeComponent.BridgeOrder` | The bridge transfer params. |
+
+<a id="setmaxbridgelossbps-uint16-uint256"></a>
+
+### setMaxBridgeLossBps
+
+Sets the maximum allowed relative value loss for transfers via this bridge while in FENCED or WALLED mode.
+
+```solidity
+function setMaxBridgeLossBps(uint16 bridgeId, uint256 newMaxBridgeLossBps) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bridgeId | `uint16` | The ID of the bridge. |
+| newMaxBridgeLossBps | `uint256` | The new maximum value loss in basis points. |
+
+<a id="setbridgecooldownduration-uint256"></a>
+
+### setBridgeCooldownDuration
+
+Sets the cooldown duration for bridge transfers while in FENCED or WALLED mode.
+
+```solidity
+function setBridgeCooldownDuration(uint256 newBridgeCooldownDuration) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| newBridgeCooldownDuration | `uint256` | The new cooldown duration in seconds. |
+
+<a id="addrecipient-uint256-address"></a>
+
+### addRecipient
+
+Adds a whitelisted recipient for bridge transfer to a given foreign chain while in FENCED or WALLED mode.
+
+```solidity
+function addRecipient(uint256 foreignChainId, address recipient) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreignChainId | `uint256` | The foreign chain ID. |
+| recipient | `address` | The address of the recipient. |
+
+<a id="removerecipient-uint256-address"></a>
+
+### removeRecipient
+
+Removes a whitelisted recipient for bridge transfer to a given foreign chain while in FENCED or WALLED mode.
+
+```solidity
+function removeRecipient(uint256 foreignChainId, address recipient) external override onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| foreignChainId | `uint256` | The foreign chain ID. |
+| recipient | `address` | The address of the recipient. |
+
+<a id="sweeperc20-address"></a>
+
+### sweepERC20
+
+Sweeps the entire balance of a given ERC20 token to the Safe.
+
+```solidity
+function sweepERC20(address token) external nonReentrant onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the ERC20 token to sweep. |
+
+<a id="sweeperc721-address-uint256"></a>
+
+### sweepERC721
+
+Sweeps a given ERC721 token to the Safe.
+
+```solidity
+function sweepERC721(address token, uint256 tokenId) external nonReentrant onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the ERC721 collection to sweep from. |
+| tokenId | `uint256` | The id of the ERC721 token to sweep. |
+
+<a id="sweeperc6909-address-uint256"></a>
+
+### sweepERC6909
+
+Sweeps the entire balance of a given ERC6909 token of type id to the Safe.
+
+```solidity
+function sweepERC6909(address token, uint256 id) external nonReentrant onlySafe;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` | The address of the ERC6909 token contract. |
+| id | `uint256` | The type of the ERC6909 token to sweep. |
+
+<a id="sweepnative"></a>
+
+### sweepNative
+
+Sweeps the entire native currency balance (e.g. ETH) to the Safe.
+
+```solidity
+function sweepNative() external nonReentrant onlySafe;
+```
+
+<a id="_swapforsafe-iswapcomponent-swaporder"></a>
+
+### _swapForSafe
+
+<i>
+
+Internal logic to execute token swaps on behalf of the Safe using a given swapper.
+
+</i>
+
+```solidity
+function _swapForSafe(ISwapComponent.SwapOrder calldata order) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| order | `ISwapComponent.SwapOrder` |  |
+
+<a id="_valueof-address-address-uint256"></a>
+
+### _valueOf
+
+<i>
+
+Returns the value of `baseTokenAmount` of `baseToken` denominated in `quoteToken`, using the registered price route.
+
+</i>
+
+```solidity
+function _valueOf(address baseToken, address quoteToken, uint256 baseTokenAmount)
+        internal
+        view
+        override(WeirollComponent, SwapComponent)
+        returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseToken | `address` |  |
+| quoteToken | `address` |  |
+| baseTokenAmount | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+
+<a id="_refundflashloan-address-uint256-address"></a>
+
+### _refundFlashLoan
+
+<i>
+
+Transfers `amount` of ERC20 `token` from the Safe to the flash loan module via a module call.
+
+</i>
+
+```solidity
+function _refundFlashLoan(address token, uint256 amount, address flashLoanModule) internal override;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+| amount | `uint256` |  |
+| flashLoanModule | `address` |  |
+
+<a id="_pullerc20fromsafe-address-uint256-address"></a>
+
+### _pullERC20FromSafe
+
+<i>
+
+Transfers `amount` of ERC20 `token` from the Safe to the given recipient via a module call.
+
+</i>
+
+```solidity
+function _pullERC20FromSafe(address token, uint256 amount, address recipient) internal;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| token | `address` |  |
+| amount | `uint256` |  |
+| recipient | `address` |  |
+
+<a id="_checkbps-uint256"></a>
+
+### _checkBps
+
+<i>
+
+Performs sanity check on a basis points value.
+
+</i>
+
+```solidity
+function _checkBps(uint256 bpsValue) internal pure;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| bpsValue | `uint256` |  |
+
+<a id="_checkfeerate-uint256"></a>
+
+### _checkFeeRate
+
+<i>
+
+Performs sanity check on a fee rate.
+
+</i>
+
+```solidity
+function _checkFeeRate(uint256 rate) internal pure;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| rate | `uint256` |  |
+
+<a id="_chargeswapfee-address-uint256"></a>
+
+### _chargeSwapFee
+
+<i>
+
+Computes the fee for a given swap output, transfers it to the fee collector, and returns it.
+
+</i>
+
+```solidity
+function _chargeSwapFee(address tokenOut, uint256 amountOut) internal returns (uint256);
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| tokenOut | `address` |  |
+| amountOut | `uint256` |  |
+
+**Returns**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| &lt;none&gt; | `uint256` |  |
+

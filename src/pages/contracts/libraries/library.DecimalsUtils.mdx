@@ -1,0 +1,62 @@
+---
+title: "DecimalsUtils"
+---
+
+# DecimalsUtils
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/libraries/DecimalsUtils.sol)
+
+## Constants
+
+### REFERENCE_CURRENCY_DECIMALS
+
+<i>
+
+Decimals used for the reference currency.
+
+</i>
+
+```solidity
+uint8 internal constant REFERENCE_CURRENCY_DECIMALS = 18;
+```
+
+### MIN_DECIMALS
+
+<i>
+
+Supported decimals range for assets
+
+</i>
+
+```solidity
+uint8 private constant MIN_DECIMALS = 6;
+```
+
+### MAX_DECIMALS
+
+```solidity
+uint8 private constant MAX_DECIMALS = 18;
+```
+
+## Functions
+
+<a id="_checkdecimals-address"></a>
+
+### _checkDecimals
+
+<i>
+
+Checks that asset exposes decimals() and that it is within the supported range.
+
+</i>
+
+```solidity
+function _checkDecimals(address asset) internal view;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| asset | `address` |  |
+

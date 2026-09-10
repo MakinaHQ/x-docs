@@ -1,0 +1,46 @@
+---
+title: "IAcrossV4SpokePool"
+---
+
+# IAcrossV4SpokePool
+
+[Git Source](https://github.com/MakinaHQ/makina-x/blob/6168e175b3488d979d1446ffd436dae8b5492cfd/src/interfaces/IAcrossV4SpokePool.sol)
+
+## Functions
+
+<a id="depositv3now-address-address-address-address-uint256-uint256-uint256-address-uint32-uint32-bytes"></a>
+
+### depositV3Now
+
+```solidity
+function depositV3Now(
+        address depositor,
+        address recipient,
+        address inputToken,
+        address outputToken,
+        uint256 inputAmount,
+        uint256 outputAmount,
+        uint256 destinationChainId,
+        address exclusiveRelayer,
+        uint32 fillDeadlineOffset,
+        uint32 exclusivityParameter,
+        bytes calldata message
+    ) external payable;
+```
+
+**Parameters**
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| depositor | `address` |  |
+| recipient | `address` |  |
+| inputToken | `address` |  |
+| outputToken | `address` |  |
+| inputAmount | `uint256` |  |
+| outputAmount | `uint256` |  |
+| destinationChainId | `uint256` |  |
+| exclusiveRelayer | `address` |  |
+| fillDeadlineOffset | `uint32` |  |
+| exclusivityParameter | `uint32` |  |
+| message | `bytes` |  |
+
