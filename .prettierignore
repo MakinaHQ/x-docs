@@ -1,0 +1,8 @@
+dist
+node_modules
+bun.lock
+sidebar.generated.ts
+
+# generated contract docs
+src/pages/contracts/**/*.md
+src/pages/contracts/**/*.mdx

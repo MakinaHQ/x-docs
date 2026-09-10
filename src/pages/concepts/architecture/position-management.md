@@ -42,11 +42,11 @@ flowchart TB
 
 ## The four instruction types
 
-| Type | Purpose |
-| --- | --- |
-| `MANAGEMENT` | Modifies the size of a position. In `WALLED` mode an associated `ACCOUNTING` instruction is required. |
-| `ACCOUNTING` | Computes the token amounts used to value a position. Applies to the `MANAGEMENT` instructions for the matching position ID. |
-| `HARVEST` | Collects rewards earned by open positions from external protocols. |
+| Type                   | Purpose                                                                                                                                                                       |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `MANAGEMENT`           | Modifies the size of a position. In `WALLED` mode an associated `ACCOUNTING` instruction is required.                                                                         |
+| `ACCOUNTING`           | Computes the token amounts used to value a position. Applies to the `MANAGEMENT` instructions for the matching position ID.                                                   |
+| `HARVEST`              | Collects rewards earned by open positions from external protocols.                                                                                                            |
 | `FLASHLOAN_MANAGEMENT` | Modifies a position inside a flash loan, always nested within an outer `MANAGEMENT` instruction. See [Flash-loan-assisted management](#flash-loan-assisted-management) below. |
 
 ## Accounting: how a position is valued

@@ -80,7 +80,12 @@ function routeFor(relPath: string): string {
 
 type Entry = { position: number; label: string; item: SidebarItem };
 
-function buildItems(absDir: string, relDir: string, depth: number, expandTop: boolean): SidebarItem[] {
+function buildItems(
+  absDir: string,
+  relDir: string,
+  depth: number,
+  expandTop: boolean,
+): SidebarItem[] {
   const entries: Entry[] = [];
 
   for (const name of readdirSync(absDir, { withFileTypes: true })) {
@@ -103,7 +108,11 @@ function buildItems(absDir: string, relDir: string, depth: number, expandTop: bo
       entries.push({
         position,
         label,
-        item: { text: label, collapsed, items: buildItems(childAbs, childRel, depth + 1, expandTop) },
+        item: {
+          text: label,
+          collapsed,
+          items: buildItems(childAbs, childRel, depth + 1, expandTop),
+        },
       });
       continue;
     }
@@ -118,7 +127,9 @@ function buildItems(absDir: string, relDir: string, depth: number, expandTop: bo
       fm.title ||
       firstHeading(content) ||
       titleCase(name.name.replace(/\.mdx?$/, ""));
-    const position = fm.sidebar_position ? Number(fm.sidebar_position) : NO_POSITION;
+    const position = fm.sidebar_position
+      ? Number(fm.sidebar_position)
+      : NO_POSITION;
     entries.push({
       position,
       label,
@@ -126,7 +137,9 @@ function buildItems(absDir: string, relDir: string, depth: number, expandTop: bo
     });
   }
 
-  entries.sort((a, b) => a.position - b.position || a.label.localeCompare(b.label));
+  entries.sort(
+    (a, b) => a.position - b.position || a.label.localeCompare(b.label),
+  );
   return entries.map((entry) => entry.item);
 }
 
@@ -134,5 +147,10 @@ export function generateSidebar(
   subdir: string,
   options?: { expandTopLevel?: boolean },
 ): SidebarItem[] {
-  return buildItems(join(PAGES_DIR, subdir), subdir, 0, options?.expandTopLevel ?? false);
+  return buildItems(
+    join(PAGES_DIR, subdir),
+    subdir,
+    0,
+    options?.expandTopLevel ?? false,
+  );
 }
