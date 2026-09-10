@@ -9,13 +9,20 @@ import { HomePage, Cards, Card } from "vocs";
 <HomePage.Root>
   <div className="home-hero-head">
     <HomePage.Logo className="home-logo" />
-    <HomePage.Tagline className="home-title">MakinaX<br />Documentation</HomePage.Tagline>
+    <HomePage.Tagline className="home-title">
+      MakinaX
+      <br />
+      Documentation
+    </HomePage.Tagline>
   </div>
   <HomePage.Description className="home-subtitle">
-    Extend a Safe multisig with an advanced DeFi execution engine, bounded by strong onchain risk controls.
+    Extend a Safe multisig with an advanced DeFi execution engine, bounded by
+    strong onchain risk controls.
   </HomePage.Description>
   <HomePage.Buttons>
-    <HomePage.Button href="/concepts/introduction" variant="accent">Get started</HomePage.Button>
+    <HomePage.Button href="/concepts/introduction" variant="accent">
+      Get started
+    </HomePage.Button>
     <HomePage.Button href="/contracts">Contracts</HomePage.Button>
   </HomePage.Buttons>
 </HomePage.Root>
@@ -23,17 +30,47 @@ import { HomePage, Cards, Card } from "vocs";
 ## Explore the protocol
 
 <Cards>
-  <Card title="Introduction" icon="book-open" to="/concepts/introduction" description="What MakinaX is, the problem it solves, and how it relates to Makina." />
-  <Card title="Architecture" icon="blocks" to="/concepts/architecture/overview" description="The Safe, the module, and the components that execute a strategy." />
-  <Card title="Permissions & Governance" icon="scale" to="/concepts/permissions-and-governance" description="The roles, the operating modes, and the trust assumptions that bound each actor." />
-  <Card title="Risk Model" icon="shield" to="/concepts/risk-model" description="The trust boundaries, external dependencies, and assumptions behind every guard." />
+  <Card
+    title="Introduction"
+    icon="book-open"
+    to="/concepts/introduction"
+    description="What MakinaX is, the problem it solves, and how it relates to Makina."
+  />
+  <Card
+    title="Architecture"
+    icon="blocks"
+    to="/concepts/architecture/overview"
+    description="The Safe, the module, and the components that execute a strategy."
+  />
+  <Card
+    title="Permissions & Governance"
+    icon="scale"
+    to="/concepts/permissions-and-governance"
+    description="The roles, the operating modes, and the trust assumptions that bound each actor."
+  />
+  <Card
+    title="Risk Model"
+    icon="shield"
+    to="/concepts/risk-model"
+    description="The trust boundaries, external dependencies, and assumptions behind every guard."
+  />
 </Cards>
 
 ## Contracts and deployments
 
 <Cards>
-  <Card title="Contracts" icon="file-code" to="/contracts" description="Reference for the module, its components, and the shared infrastructure." />
-  <Card title="Deployments" icon="route" to="/contracts/deployments" description="Onchain addresses of the protocol-wide contracts." />
+  <Card
+    title="Contracts"
+    icon="file-code"
+    to="/contracts"
+    description="Reference for the module, its components, and the shared infrastructure."
+  />
+  <Card
+    title="Deployments"
+    icon="route"
+    to="/contracts/deployments"
+    description="Onchain addresses of the protocol-wide contracts."
+  />
 </Cards>
 
 ## Audits and security

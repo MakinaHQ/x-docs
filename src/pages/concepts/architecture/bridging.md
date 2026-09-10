@@ -37,11 +37,11 @@ A whitelisted recipient must be an address the same party controls and can custo
 
 ## Supported bridges
 
-| Bridge | Encoder | Routing model |
-| --- | --- | --- |
-| **Across V4** | [`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder) | Input-to-output token routes, per destination chain. |
-| **Circle CCTP V2** | [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/contract.CctpV2BridgeEncoder) | Maps EVM chain IDs to CCTP domains. |
-| **LayerZero V2** | [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder) | OFT standard. Chain-ID-to-endpoint-ID mappings and an allowlist of OFTs. |
+| Bridge             | Encoder                                                                                    | Routing model                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| **Across V4**      | [`AcrossV4BridgeEncoder`](/contracts/bridge-encoders/contract.AcrossV4BridgeEncoder)       | Input-to-output token routes, per destination chain.                     |
+| **Circle CCTP V2** | [`CctpV2BridgeEncoder`](/contracts/bridge-encoders/contract.CctpV2BridgeEncoder)           | Maps EVM chain IDs to CCTP domains.                                      |
+| **LayerZero V2**   | [`LayerZeroV2BridgeEncoder`](/contracts/bridge-encoders/contract.LayerZeroV2BridgeEncoder) | OFT standard. Chain-ID-to-endpoint-ID mappings and an allowlist of OFTs. |
 
 ## The native gas buffer
 
@@ -51,11 +51,11 @@ LayerZero V2 transfers require a native gas fee paid alongside the transfer. The
 
 Every order carries common fields (input token, amount, destination chain, recipient, minimum output) plus bridge-specific `extraData`. What the Operator chooses, and what is fixed by registration, differs per bridge:
 
-| Bridge | Operator supplies (`extraData`) | Registered by infrastructure |
-| --- | --- | --- |
-| **Across V4** | output token, fill deadline | input-to-output routes, per destination chain |
-| **CCTP V2** | finality threshold | EVM chain ID to CCTP domain |
-| **LayerZero V2** | OFT, gas, max fee | endpoint IDs, allowed OFTs |
+| Bridge           | Operator supplies (`extraData`) | Registered by infrastructure                  |
+| ---------------- | ------------------------------- | --------------------------------------------- |
+| **Across V4**    | output token, fill deadline     | input-to-output routes, per destination chain |
+| **CCTP V2**      | finality threshold              | EVM chain ID to CCTP domain                   |
+| **LayerZero V2** | OFT, gas, max fee               | endpoint IDs, allowed OFTs                    |
 
 The encoder then checks, per bridge:
 

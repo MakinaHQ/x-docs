@@ -23,13 +23,13 @@ flowchart LR
 
 ### What each mode enforces
 
-| Check | OPEN | FENCED | WALLED |
-| --- | :---: | :---: | :---: |
-| Instruction Merkle proof verification | Yes | Yes | Yes |
-| Swap value loss limit and cooldown | No | Yes | Yes |
-| Bridge recipient whitelist, loss limit, cooldown, route/OFT registration | No | Yes | Yes |
-| Position management: mandatory accounting | No | No | Yes |
-| Position management: value-loss matrix, direction checks, and instruction cooldown | No | No | Yes |
+| Check                                                                              | OPEN | FENCED | WALLED |
+| ---------------------------------------------------------------------------------- | :--: | :----: | :----: |
+| Instruction Merkle proof verification                                              | Yes  |  Yes   |  Yes   |
+| Swap value loss limit and cooldown                                                 |  No  |  Yes   |  Yes   |
+| Bridge recipient whitelist, loss limit, cooldown, route/OFT registration           |  No  |  Yes   |  Yes   |
+| Position management: mandatory accounting                                          |  No  |   No   |  Yes   |
+| Position management: value-loss matrix, direction checks, and instruction cooldown |  No  |   No   |  Yes   |
 
 ## Two independent halts
 

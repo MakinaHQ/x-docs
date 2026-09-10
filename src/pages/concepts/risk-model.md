@@ -73,15 +73,15 @@ Every oracle-priced guard inherits the oracle's integrity assumptions: honest Ch
 
 ## External dependencies
 
-| Dependency | Used for | Trust posture |
-| --- | --- | --- |
-| **Enso Weiroll VM** | Position management execution (delegatecall in Safe) | High trust, immutable address |
-| **DEX aggregators** | Swaps | Black box, bounded by output measurement and loss check |
-| **Across V4, CCTP V2, LayerZero V2** | Outbound bridging | Black box, bounded by whitelist, loss, registration |
-| **Morpho** | Flash loans | Trusted for `assets` and fee-free repayment |
-| **Chainlink-compatible feeds** | All pricing | Trusted for answer, decimals, freshness |
-| **Safe** | Custody and module execution | Fully trusted owner |
-| **OpenZeppelin AccessManager** | Infrastructure authorization | Trusted infra control plane |
+| Dependency                           | Used for                                             | Trust posture                                           |
+| ------------------------------------ | ---------------------------------------------------- | ------------------------------------------------------- |
+| **Enso Weiroll VM**                  | Position management execution (delegatecall in Safe) | High trust, immutable address                           |
+| **DEX aggregators**                  | Swaps                                                | Black box, bounded by output measurement and loss check |
+| **Across V4, CCTP V2, LayerZero V2** | Outbound bridging                                    | Black box, bounded by whitelist, loss, registration     |
+| **Morpho**                           | Flash loans                                          | Trusted for `assets` and fee-free repayment             |
+| **Chainlink-compatible feeds**       | All pricing                                          | Trusted for answer, decimals, freshness                 |
+| **Safe**                             | Custody and module execution                         | Fully trusted owner                                     |
+| **OpenZeppelin AccessManager**       | Infrastructure authorization                         | Trusted infra control plane                             |
 
 :::tip[Next]
 For the parameters that configure these guards, see [Configure the MakinaX Module](/configure).

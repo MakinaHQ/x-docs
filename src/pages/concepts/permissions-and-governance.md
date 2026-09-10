@@ -58,13 +58,13 @@ All protocol-wide restricted actions are gated by a single `AccessManager` per c
 
 Each role can carry an **execution delay** (a timelock between scheduling a restricted action and executing it) and a **guardian** that can cancel a scheduled action during that window. Role holders and their execution delays are set at deployment. In production, the DAO multisig holds the admin, configuration, deployment, and upgrade roles, and the Security Council multisig holds `GUARDIAN_ROLE`, the guardian of every other role except `ADMIN_ROLE`, which has none.
 
-| Role | id | Authority in MakinaX | Holder, execution delay |
-| --- | --- | --- | --- |
-| `ADMIN_ROLE` | 0 | Super admin of the AccessManager: configure roles, delays, and guardians. Has **no guardian**, so its actions cannot be cancelled by anyone else. | DAO: 2-day delay |
-| `INFRA_CONFIG_ROLE` | 1 | Set the registry's fee collector, configure the bridge encoders (routes, CCTP domains, endpoint IDs, OFTs), and set the factory's default Provider and default swap fee rate for permissionless deployment. | DAO: 1-day delay |
-| `STRATEGY_DEPLOYMENT_ROLE` | 2 | Deploy new modules via the `ModuleFactory` with caller-supplied service parameters, and enable or disable permissionless deployment. | DAO: no delay |
-| `INFRA_UPGRADE_ROLE` | 6 | Upgrade the infrastructure proxies through the associated ProxyAdmin, and set the registry's component addresses (factory, module implementation, flash-loan module, bridge encoders). | DAO: 2-day delay |
-| `GUARDIAN_ROLE` | 7 | Cancel operations scheduled under any other role. It is the guardian of every role except `ADMIN_ROLE`. | Security Council: no delay |
+| Role                       | id  | Authority in MakinaX                                                                                                                                                                                        | Holder, execution delay    |
+| -------------------------- | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| `ADMIN_ROLE`               | 0   | Super admin of the AccessManager: configure roles, delays, and guardians. Has **no guardian**, so its actions cannot be cancelled by anyone else.                                                           | DAO: 2-day delay           |
+| `INFRA_CONFIG_ROLE`        | 1   | Set the registry's fee collector, configure the bridge encoders (routes, CCTP domains, endpoint IDs, OFTs), and set the factory's default Provider and default swap fee rate for permissionless deployment. | DAO: 1-day delay           |
+| `STRATEGY_DEPLOYMENT_ROLE` | 2   | Deploy new modules via the `ModuleFactory` with caller-supplied service parameters, and enable or disable permissionless deployment.                                                                        | DAO: no delay              |
+| `INFRA_UPGRADE_ROLE`       | 6   | Upgrade the infrastructure proxies through the associated ProxyAdmin, and set the registry's component addresses (factory, module implementation, flash-loan module, bridge encoders).                      | DAO: 2-day delay           |
+| `GUARDIAN_ROLE`            | 7   | Cancel operations scheduled under any other role. It is the guardian of every role except `ADMIN_ROLE`.                                                                                                     | Security Council: no delay |
 
 These powers are protocol-wide. A change to a shared address or an encoder registration affects every module that uses it.
 

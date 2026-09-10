@@ -31,13 +31,13 @@ A module operates on a single chain. Cross-chain movement is **outbound bridging
 
 [`MakinaXModule`](/contracts/contract.MakinaXModule) is the single concrete contract. It inherits a set of abstract components, each owning one responsibility:
 
-| Component | Responsibility | Conceptual page |
-| --- | --- | --- |
+| Component                       | Responsibility                                                                                         | Conceptual page                                                   |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
 | **Weiroll position management** | Open, modify, close, and value positions through pre-approved Weiroll scripts run in the Safe context. | [Position Management](/concepts/architecture/position-management) |
-| **Swap** | Execute token swaps through external DEX aggregators using operator-supplied calldata. | [Token Swaps](/concepts/architecture/swaps) |
-| **Bridge** | Send outbound cross-chain transfers using the calldata and target provided by per-bridge encoders. | [Token Bridging](/concepts/architecture/bridging) |
-| **Oracle registry** | Price tokens through Chainlink-compatible feeds, the backbone of every loss check. | [Pricing & Oracles](/concepts/architecture/pricing-oracles) |
-| **Governable** | Module-level roles, the pause and suspend halts, and the operating mode. | [Permissions & Governance](/concepts/permissions-and-governance) |
+| **Swap**                        | Execute token swaps through external DEX aggregators using operator-supplied calldata.                 | [Token Swaps](/concepts/architecture/swaps)                       |
+| **Bridge**                      | Send outbound cross-chain transfers using the calldata and target provided by per-bridge encoders.     | [Token Bridging](/concepts/architecture/bridging)                 |
+| **Oracle registry**             | Price tokens through Chainlink-compatible feeds, the backbone of every loss check.                     | [Pricing & Oracles](/concepts/architecture/pricing-oracles)       |
+| **Governable**                  | Module-level roles, the pause and suspend halts, and the operating mode.                               | [Permissions & Governance](/concepts/permissions-and-governance)  |
 
 Flash loans are handled by a separate shared contract, the [`FlashLoanModule`](/contracts/flash-loans/contract.FlashLoanModule), used only inside flash-loan-assisted position management. See [Flash-loan-assisted management](/concepts/architecture/position-management#flash-loan-assisted-management).
 
@@ -78,21 +78,21 @@ sequenceDiagram
 
 ## Glossary
 
-| Term | Meaning |
-| --- | --- |
-| **Safe** | The Gnosis Safe multisig that owns the funds and the module. The sole configuration authority. |
-| **Module** | An instance of `MakinaXModule`, installed on one Safe. The constrained automation layer. |
-| **Operator** | An address the Safe authorizes to execute strategy actions through the module. Holds no configuration power. |
-| **Provider** | A protocol service account that sets the swap fee rate and can suspend the module. |
-| **Guardian** | An address that can pause and unpause the module. The Safe is always a Guardian. |
-| **Operating mode** | The dial (`OPEN`, `FENCED`, `WALLED`) that selects how tightly Operator actions are constrained. See [Operating Modes](/concepts/architecture/operating-modes). |
-| **Instruction** | A pre-approved action, committed as a leaf in a Merkle tree, that an Operator may execute. See [Position Management](/concepts/architecture/position-management). |
-| **Position** | A deployment of capital into an external protocol, tracked and valued by the module. Can be an asset or a debt. |
-| **Accounting currency** | The token (or the reference currency) in which position values are expressed. See [Pricing & Oracles](/concepts/architecture/pricing-oracles). |
-| **Reference currency** | The base unit of the oracle (for example USD), addressed as `address(0)`, in 18 decimals. |
-| **Weiroll** | The command-chaining VM used to execute position management scripts inside the Safe by delegatecall. |
-| **Bridge encoder** | A shared contract that builds the calldata for one external bridge protocol. |
-| **Registry / Factory** | Shared infrastructure that resolves addresses and deploys modules. |
+| Term                    | Meaning                                                                                                                                                           |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Safe**                | The Gnosis Safe multisig that owns the funds and the module. The sole configuration authority.                                                                    |
+| **Module**              | An instance of `MakinaXModule`, installed on one Safe. The constrained automation layer.                                                                          |
+| **Operator**            | An address the Safe authorizes to execute strategy actions through the module. Holds no configuration power.                                                      |
+| **Provider**            | A protocol service account that sets the swap fee rate and can suspend the module.                                                                                |
+| **Guardian**            | An address that can pause and unpause the module. The Safe is always a Guardian.                                                                                  |
+| **Operating mode**      | The dial (`OPEN`, `FENCED`, `WALLED`) that selects how tightly Operator actions are constrained. See [Operating Modes](/concepts/architecture/operating-modes).   |
+| **Instruction**         | A pre-approved action, committed as a leaf in a Merkle tree, that an Operator may execute. See [Position Management](/concepts/architecture/position-management). |
+| **Position**            | A deployment of capital into an external protocol, tracked and valued by the module. Can be an asset or a debt.                                                   |
+| **Accounting currency** | The token (or the reference currency) in which position values are expressed. See [Pricing & Oracles](/concepts/architecture/pricing-oracles).                    |
+| **Reference currency**  | The base unit of the oracle (for example USD), addressed as `address(0)`, in 18 decimals.                                                                         |
+| **Weiroll**             | The command-chaining VM used to execute position management scripts inside the Safe by delegatecall.                                                              |
+| **Bridge encoder**      | A shared contract that builds the calldata for one external bridge protocol.                                                                                      |
+| **Registry / Factory**  | Shared infrastructure that resolves addresses and deploys modules.                                                                                                |
 
 :::tip[Next]
 Continue to [Operating Modes](/concepts/architecture/operating-modes) to understand the dial that governs every Operator action.
