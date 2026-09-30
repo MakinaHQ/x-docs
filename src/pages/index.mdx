@@ -9,10 +9,18 @@ import { HomePage, Cards, Card } from "vocs";
 <HomePage.Root>
   <div className="home-hero-head">
     <HomePage.Logo className="home-logo" />
+    {/* Title is a JSX expression child: MDX markdown-processes plain element
+        children, wrapping each line around the <br /> in its own <p> (nested
+        paragraphs that break the layout). Content inside {…} is treated as JSX,
+        so it stays a single inline run regardless of how Prettier reflows it. */}
     <HomePage.Tagline className="home-title">
-      MakinaX
-      <br />
-      Documentation
+      {
+        <>
+          MakinaX
+          <br />
+          Documentation
+        </>
+      }
     </HomePage.Tagline>
   </div>
   <HomePage.Description className="home-subtitle">
